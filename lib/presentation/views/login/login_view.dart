@@ -65,7 +65,7 @@ class _LoginViewState extends State<LoginView> {
                         spacing: 50,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SvgPicture.asset('logo.svg', height: 30),
+                          SvgPicture.asset('assets/logo.svg', height: 30),
 
                           Expanded(
                             child: Column(
@@ -73,7 +73,7 @@ class _LoginViewState extends State<LoginView> {
                               spacing: 10,
                               children: [
                                 SvgPicture.asset(
-                                  'section-cards.svg',
+                                  'assets/section-cards.svg',
                                   height: 300,
                                 ),
 
