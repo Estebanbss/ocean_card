@@ -18,7 +18,7 @@ class HomeScreenState extends State<Navegador> {
   bool hoverTheme = false;
   bool hoverLogout = false;
   bool hoverNotifications = false;
-  bool _isNavigationRailExpanded = false;
+  final bool _isNavigationRailExpanded = false;
 
   @override
   void initState() {
@@ -39,7 +39,7 @@ class HomeScreenState extends State<Navegador> {
           case 'home':
             newIndex = 0;
             break;
-          case 'reservas':
+          case 'card':
             newIndex = 1;
             break;
         }
@@ -59,8 +59,19 @@ class HomeScreenState extends State<Navegador> {
         GoRouter.of(context).go('/home');
         break;
       case 1:
-        GoRouter.of(context).go('/reservas');
+        GoRouter.of(context).go('/card');
         break;
+    }
+  }
+
+  String _getGreeting() {
+    final hour = DateTime.now().hour;
+    if (hour < 12) {
+      return "Good morning,";
+    } else if (hour < 18) {
+      return "Good afternoon,";
+    } else {
+      return "Good evening,";
     }
   }
 
@@ -109,8 +120,8 @@ class HomeScreenState extends State<Navegador> {
     destinations = const [
       NavigationRailDestination(icon: Icon(Icons.home), label: Text('Home')),
       NavigationRailDestination(
-        icon: Icon(Icons.event_available),
-        label: Text('Reservas'),
+        icon: Icon(Icons.credit_card), // Cambiado a tarjeta de crédito
+        label: Text('Card'),
       ),
     ];
 
@@ -177,8 +188,8 @@ class HomeScreenState extends State<Navegador> {
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
         BottomNavigationBarItem(
-          icon: Icon(Icons.event_available),
-          label: 'Reservas',
+          icon: Icon(Icons.credit_card), // Cambiado a tarjeta de crédito
+          label: 'Card',
         ),
       ],
       currentIndex: _selectedIndex,
@@ -193,29 +204,56 @@ class HomeScreenState extends State<Navegador> {
       builder: (context, isDarkTheme) {
         return Scaffold(
           appBar: AppBar(
-            leading: MediaQuery.of(context).size.width > 800
-                ? IconButton(
-                    icon: Icon(
-                      _isNavigationRailExpanded ? Icons.menu_open : Icons.menu,
-                      color: Theme.of(context).colorScheme.onPrimary,
+            automaticallyImplyLeading: false,
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // Profile IconButton (left)
+                IconButton(
+                  icon: const Icon(Icons.account_circle, size: 32),
+                  color: Theme.of(context).colorScheme.onPrimary,
+                  onPressed: () {
+                    // Acción para perfil
+                  },
+                ),
+                // User greeting (right)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      _getGreeting(),
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onPrimary.withValues(alpha: 0.7),
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
-                    onPressed: () {
-                      setState(() {
-                        _isNavigationRailExpanded = !_isNavigationRailExpanded;
-                      });
-                    },
-                  )
-                : null,
-            title: Text(
-              'Sync-Re 🔄',
-              style: TextStyle(
-                fontSize: MediaQuery.of(context).size.width > 600 ? 24 : 18,
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.onPrimary,
-              ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "Codes korede ",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Theme.of(context).colorScheme.onPrimary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Icon(
+                          Icons.waving_hand,
+                          color: Colors.amber,
+                          size: 22,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
             ),
             actions: [_buildLogoutButton(), _buildThemeButton(isDarkTheme)],
-            backgroundColor: Theme.of(context).colorScheme.primary,
           ),
           body: LayoutBuilder(
             builder: (context, constraints) {

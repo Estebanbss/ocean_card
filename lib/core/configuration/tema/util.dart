@@ -15,5 +15,7 @@ TextTheme createTextTheme(
     labelMedium: bodyTextTheme.labelMedium,
     labelSmall: bodyTextTheme.labelSmall,
   );
+  // hacemos copywith a los distintos fontweights
+  
   return textTheme;
 }

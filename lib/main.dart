@@ -72,7 +72,7 @@ class _MainAppState extends State<MainApp> with WidgetsBindingObserver {
               themeMode: ThemeMode.light,
               theme: state ? theme.dark() : theme.light(),
               darkTheme: theme.dark(),
-              highContrastTheme: theme.lightHighContrast(),
+
               localizationsDelegates: _localizationDelegates,
               supportedLocales: _supportedLocales,
             ),

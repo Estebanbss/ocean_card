@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ocean_card/presentation/views/card/card_view.dart';
 
 import '../../navegador.dart';
 import '../../presentation/views/home/home_view.dart';
@@ -36,6 +37,12 @@ GoRouter createAppRouter() {
             path: '/home',
             pageBuilder: (context, state) {
               return customTransitionPage(const HomeView(), state);
+            },
+          ),
+          GoRoute(
+            path: '/card',
+            pageBuilder: (context, state) {
+              return customTransitionPage(const CardView(), state);
             },
           ),
         ],

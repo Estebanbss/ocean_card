@@ -22,11 +22,15 @@ class _LoginViewState extends State<LoginView> {
   final PageController _pageController = PageController();
 
   void _goToPage(int index) {
-    _pageController.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    );
+    if ((index - _pageController.page!.round()).abs() > 1) {
+      _pageController.jumpToPage(index);
+    } else {
+      _pageController.animateToPage(
+        index,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
   }
 
   @override
@@ -52,66 +56,112 @@ class _LoginViewState extends State<LoginView> {
                   padding: const EdgeInsets.all(20),
                   child: Center(
                     child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 400),
+                      constraints: const BoxConstraints(
+                        maxWidth: 400,
+                        maxHeight: 800,
+                      ),
                       child: Column(
-                        spacing: 40,
+                        mainAxisSize: MainAxisSize.max,
+                        spacing: 50,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SvgPicture.asset('logo.svg', height: 30),
-                          SvgPicture.asset('section-cards.svg', height: 300),
-                          Column(
-                            spacing: 10,
-                            children: [
-                              ElevatedButton(
-                                onPressed: () => _goToPage(1),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      colorScheme.secondaryContainer,
-                                  foregroundColor: Colors.white,
-                                  minimumSize: const Size(double.infinity, 50),
-                                  elevation: 2,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(100),
-                                    ),
-                                  ),
-                                ),
-                                child: Text(
-                                  'Get Started',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
 
-                              OutlinedButton(
-                                onPressed: () => _goToPage(6),
-                                style: OutlinedButton.styleFrom(
-                                  side: BorderSide(
-                                    color: colorScheme.secondaryContainer,
-                                  ),
-                                  foregroundColor:
-                                      colorScheme.secondaryContainer,
-                                  minimumSize: const Size(double.infinity, 50),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(100),
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              spacing: 10,
+                              children: [
+                                SvgPicture.asset(
+                                  'section-cards.svg',
+                                  height: 300,
+                                ),
+
+                                Column(
+                                  spacing: 10,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      textAlign: TextAlign.center,
+                                      'Empower your Money Simplify Your Life',
+                                      style: TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w900,
+                                        color: colorScheme.onSurface,
+                                      ),
                                     ),
-                                  ),
-                                  backgroundColor: Colors.transparent,
+                                    Text(
+                                      'The tide has changed. So has your money.',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: colorScheme.onSurface,
+                                        fontWeight: FontWeight.w100,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
                                 ),
-                                child: Text(
-                                  'Sign in',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: colorScheme.secondaryContainer,
-                                  ),
+
+                                Column(
+                                  spacing: 10,
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () => _goToPage(1),
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: colorScheme.primary,
+                                        foregroundColor: Colors.white,
+                                        minimumSize: const Size(
+                                          double.infinity,
+                                          50,
+                                        ),
+                                        elevation: 2,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(100),
+                                          ),
+                                        ),
+                                      ),
+                                      child: Text(
+                                        'Get Started',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+
+                                    OutlinedButton(
+                                      onPressed: () => _goToPage(6),
+                                      style: OutlinedButton.styleFrom(
+                                        side: BorderSide(
+                                          color: colorScheme.primary,
+                                        ),
+                                        foregroundColor: colorScheme.primary,
+                                        minimumSize: const Size(
+                                          double.infinity,
+                                          50,
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(100),
+                                          ),
+                                        ),
+                                        backgroundColor: Colors.transparent,
+                                      ),
+                                      child: Text(
+                                        'Sign in',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: colorScheme.primary,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -119,9 +169,15 @@ class _LoginViewState extends State<LoginView> {
                   ),
                 ),
                 // Página 1: Started
-                Started(onNext: () => _goToPage(2)),
+                Started(
+                  onNext: () => _goToPage(2),
+                  onSignIn: () => _goToPage(6),
+                ),
                 // Página 2: FourDigitCode
-                FourDigitCode(onNext: () => _goToPage(3)),
+                FourDigitCode(
+                  onNext: () => _goToPage(3),
+                  onSignIn: () => _goToPage(6),
+                ),
                 // Página 3: PersonalInformation
                 PersonalInformation(onNext: () => _goToPage(4)),
                 // Página 4: HomeAdress
