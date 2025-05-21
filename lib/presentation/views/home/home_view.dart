@@ -20,6 +20,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final router = GoRouter.of(context);
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
@@ -132,7 +133,9 @@ class _HomeViewState extends State<HomeView> {
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton.icon(
-                              onPressed: () => context.go('/add-funds'),
+                              onPressed: () {
+                                router.go('/add-funds');
+                              },
                               icon: const Icon(Icons.add, color: Colors.white),
                               label: const Text(
                                 'Add funds',
@@ -211,25 +214,25 @@ class _HomeViewState extends State<HomeView> {
                             icon: Icons.download,
                             label: 'Deposit',
                             color: Colors.white,
-                            onTap: () => context.go('/deposit'),
+                            onTap: () => router.go('/deposit'),
                           ),
                           QuickActionButton(
                             icon: Icons.swap_horiz,
                             label: 'Exchange',
                             color: Colors.white,
-                            onTap: () => context.go('/exchange'),
+                            onTap: () => router.go('/exchange'),
                           ),
                           QuickActionButton(
                             icon: Icons.upload,
                             label: 'Withdraw',
                             color: Colors.white,
-                            onTap: () => context.go('/withdraw'),
+                            onTap: () => router.go('/withdraw'),
                           ),
                           QuickActionButton(
                             icon: Icons.credit_card,
                             label: 'Your CVU',
                             color: Colors.white,
-                            onTap: () => context.go('/cvu'),
+                            onTap: () => router.go('/cvu'),
                           ),
                         ],
                       ),
@@ -263,28 +266,29 @@ class _HomeViewState extends State<HomeView> {
                             title: 'Transfer',
                             icon: Icons.sync_alt,
                             description: 'Transfer your funds',
-                            onTap: () => context.go('/transfer'),
+                            onTap: () => router.go('/transfer'),
                             colorScheme: colorScheme,
                           ),
                           HomeActionCard(
                             title: 'Buy & Sell',
                             icon: Icons.swap_horiz,
                             description: 'Buy and sell assets',
-                            onTap: () => context.go('/buy-sell'),
+                            onTap: () => router.go('/buy-sell'),
                             colorScheme: colorScheme,
                           ),
                           HomeActionCard(
                             title: 'Ocean Card',
+                            icon: Icons.credit_card,
                             svgIconPath: 'assets/card_black.svg',
                             description: 'Manage your card',
-                            onTap: () => context.go('/card'),
+                            onTap: () => router.go('/card'),
                             colorScheme: colorScheme,
                           ),
                           HomeActionCard(
                             title: 'Earn Money',
                             icon: Icons.monetization_on,
                             description: 'Invite and earn rewards',
-                            onTap: () => context.go('/earn-money'),
+                            onTap: () => router.go('/earn-money'),
                             colorScheme: colorScheme,
                           ),
                         ],

@@ -387,7 +387,7 @@ class _CardViewState extends State<CardView> {
                         }
                         return ListTile(
                           leading: CircleAvatar(
-                            backgroundColor: iconColor.withOpacity(0.15),
+                            backgroundColor: iconColor.withValues(alpha:0.15),
                             child: Icon(icon, color: iconColor),
                           ),
                           title: Text(

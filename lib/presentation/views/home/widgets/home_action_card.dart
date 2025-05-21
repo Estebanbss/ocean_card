@@ -57,12 +57,8 @@ class HomeActionCard extends StatelessWidget {
                   child: svgIconPath != null && svgIconPath!.isNotEmpty
                       ? SvgPicture.asset(
                           svgIconPath!,
-                          width: 56,
-                          height: 56,
-                          colorFilter: ColorFilter.mode(
-                            colorScheme.primary,
-                            BlendMode.srcIn,
-                          ),
+                      
+                          
                         )
                       : Icon(icon, size: 56, color: colorScheme.primary),
                 ),

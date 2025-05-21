@@ -11,11 +11,34 @@ class SettingsView extends StatelessWidget {
         title: const Text('Card Settings'),
         backgroundColor: colorScheme.primary,
       ),
-      body: Center(
-        child: Text(
-          'Here you can change your card settings.',
-          style: TextStyle(fontSize: 20, color: colorScheme.onSurface),
-        ),
+      body: ListView(
+        padding: const EdgeInsets.all(32),
+        children: [
+          ListTile(
+            leading: Icon(Icons.lock, color: colorScheme.primary),
+            title: const Text('Change PIN'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(Icons.visibility_off, color: colorScheme.primary),
+            title: const Text('Hide Card Number'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(Icons.delete, color: colorScheme.primary),
+            title: const Text('Delete Card'),
+            onTap: () {},
+          ),
+          const SizedBox(height: 24),
+          Text(
+            'Manage your card settings here.',
+            style: TextStyle(
+              fontSize: 16,
+              color: colorScheme.onSurface.withAlpha(180),
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     );
   }
