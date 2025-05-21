@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'widgets/home_action_card.dart';
 import 'widgets/quick_action_button.dart';
 
@@ -131,9 +132,7 @@ class _HomeViewState extends State<HomeView> {
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton.icon(
-                              onPressed: () {
-                                // Add funds action
-                              },
+                              onPressed: () => context.go('/add-funds'),
                               icon: const Icon(Icons.add, color: Colors.white),
                               label: const Text(
                                 'Add funds',
@@ -212,25 +211,25 @@ class _HomeViewState extends State<HomeView> {
                             icon: Icons.download,
                             label: 'Deposit',
                             color: Colors.white,
-                            onTap: () {},
+                            onTap: () => context.go('/deposit'),
                           ),
                           QuickActionButton(
                             icon: Icons.swap_horiz,
                             label: 'Exchange',
                             color: Colors.white,
-                            onTap: () {},
+                            onTap: () => context.go('/exchange'),
                           ),
                           QuickActionButton(
                             icon: Icons.upload,
                             label: 'Withdraw',
                             color: Colors.white,
-                            onTap: () {},
+                            onTap: () => context.go('/withdraw'),
                           ),
                           QuickActionButton(
                             icon: Icons.credit_card,
                             label: 'Your CVU',
                             color: Colors.white,
-                            onTap: () {},
+                            onTap: () => context.go('/cvu'),
                           ),
                         ],
                       ),
@@ -264,28 +263,28 @@ class _HomeViewState extends State<HomeView> {
                             title: 'Transfer',
                             icon: Icons.sync_alt,
                             description: 'Transfer your funds',
-                            onTap: () {},
+                            onTap: () => context.go('/transfer'),
                             colorScheme: colorScheme,
                           ),
                           HomeActionCard(
                             title: 'Buy & Sell',
                             icon: Icons.swap_horiz,
                             description: 'Buy and sell assets',
-                            onTap: () {},
+                            onTap: () => context.go('/buy-sell'),
                             colorScheme: colorScheme,
                           ),
                           HomeActionCard(
                             title: 'Ocean Card',
-                            icon: Icons.credit_card,
+                            svgIconPath: 'assets/card_black.svg',
                             description: 'Manage your card',
-                            onTap: () {},
+                            onTap: () => context.go('/card'),
                             colorScheme: colorScheme,
                           ),
                           HomeActionCard(
                             title: 'Earn Money',
                             icon: Icons.monetization_on,
                             description: 'Invite and earn rewards',
-                            onTap: () {},
+                            onTap: () => context.go('/earn-money'),
                             colorScheme: colorScheme,
                           ),
                         ],
