@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ocean_card/presentation/views/login/dialogs/forgot_password_dialog.dart';
+
 
 class Login extends StatefulWidget {
   final VoidCallback onNext;
@@ -94,7 +96,10 @@ class _LoginState extends State<Login> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      // Acción para "Forgot password?"
+                      showDialog(
+                        context: context,
+                        builder: (context) => const ForgotPasswordDialog(),
+                      );
                     },
                     child: Text(
                       'Forgot password?',

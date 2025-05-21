@@ -2,6 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ocean_card/presentation/views/card/subviews/freeze_view.dart';
+import 'package:ocean_card/presentation/views/card/subviews/details_view.dart';
+import 'package:ocean_card/presentation/views/card/subviews/settings_view.dart';
 
 class CardView extends StatefulWidget {
   const CardView({super.key});
@@ -139,6 +142,24 @@ class _CardViewState extends State<CardView> {
     // ),
   ];
 
+  void _openFreeze() {
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (_) => const FreezeView()));
+  }
+
+  void _openDetails() {
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (_) => const DetailsView()));
+  }
+
+  void _openSettings() {
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (_) => const SettingsView()));
+  }
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -273,7 +294,7 @@ class _CardViewState extends State<CardView> {
                       children: [
                         // Freeze
                         ElevatedButton.icon(
-                          onPressed: () {},
+                          onPressed: _openFreeze,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: colorScheme.primary,
                             foregroundColor: Colors.white,
@@ -298,7 +319,7 @@ class _CardViewState extends State<CardView> {
                         ),
                         // Details
                         TextButton.icon(
-                          onPressed: () {},
+                          onPressed: _openDetails,
                           icon: Icon(
                             Icons.info_outline,
                             color: colorScheme.primary,
@@ -314,7 +335,7 @@ class _CardViewState extends State<CardView> {
                         ),
                         // Settings
                         TextButton.icon(
-                          onPressed: () {},
+                          onPressed: _openSettings,
                           icon: Icon(
                             Icons.settings,
                             color: colorScheme.primary,
