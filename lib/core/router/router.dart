@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ocean_card/presentation/views/card/card_view.dart';
+import 'package:ocean_card/presentation/views/actions/actions.dart';
 
 import '../../navegador.dart';
 import '../../presentation/views/home/home_view.dart';
@@ -43,6 +44,54 @@ GoRouter createAppRouter() {
             path: '/card',
             pageBuilder: (context, state) {
               return customTransitionPage(const CardView(), state);
+            },
+          ),
+          GoRoute(
+            path: '/deposit',
+            pageBuilder: (context, state) {
+              return customTransitionPage(const DepositView(), state);
+            },
+          ),
+          GoRoute(
+            path: '/exchange',
+            pageBuilder: (context, state) {
+              return customTransitionPage(const ExchangeView(), state);
+            },
+          ),
+          GoRoute(
+            path: '/withdraw',
+            pageBuilder: (context, state) {
+              return customTransitionPage(const WithdrawView(), state);
+            },
+          ),
+          GoRoute(
+            path: '/cvu',
+            pageBuilder: (context, state) {
+              return customTransitionPage(const CvuView(), state);
+            },
+          ),
+          GoRoute(
+            path: '/add-funds',
+            pageBuilder: (context, state) {
+              return customTransitionPage(const AddFundsView(), state);
+            },
+          ),
+          GoRoute(
+            path: '/transfer',
+            pageBuilder: (context, state) {
+              return customTransitionPage(const TransferView(), state);
+            },
+          ),
+          GoRoute(
+            path: '/buy-sell',
+            pageBuilder: (context, state) {
+              return customTransitionPage(const BuySellView(), state);
+            },
+          ),
+          GoRoute(
+            path: '/earn-money',
+            pageBuilder: (context, state) {
+              return customTransitionPage(const EarnMoneyView(), state);
             },
           ),
         ],

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeActionCard extends StatelessWidget {
   final String title;
   final IconData icon;
+  final String? svgIconPath;
   final String description;
   final VoidCallback onTap;
   final ColorScheme colorScheme;
@@ -11,6 +13,7 @@ class HomeActionCard extends StatelessWidget {
     super.key,
     required this.title,
     required this.icon,
+    this.svgIconPath,
     required this.description,
     required this.onTap,
     required this.colorScheme,
@@ -51,7 +54,17 @@ class HomeActionCard extends StatelessWidget {
               // Central icon
               Expanded(
                 child: Center(
-                  child: Icon(icon, size: 56, color: colorScheme.primary),
+                  child: svgIconPath != null && svgIconPath!.isNotEmpty
+                      ? SvgPicture.asset(
+                          svgIconPath!,
+                          width: 56,
+                          height: 56,
+                          colorFilter: ColorFilter.mode(
+                            colorScheme.primary,
+                            BlendMode.srcIn,
+                          ),
+                        )
+                      : Icon(icon, size: 56, color: colorScheme.primary),
                 ),
               ),
               // Bottom description
