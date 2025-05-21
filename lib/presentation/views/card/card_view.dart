@@ -104,6 +104,9 @@ class _CardViewState extends State<CardView> {
       name: 'Alex Johnson',
       lastDigits: '****8456',
       history: [
+        _Movement('Sent to John', '-\$120.00', 'Yesterday'),
+        _Movement('Deposit', '+\$500.00', '2 days ago'),
+        _Movement('Amazon', '-\$80.00', '3 days ago'),
         _Movement('Coffee Shop', '-\$4.50', 'Today'),
         _Movement('ATM Withdrawal', '-\$100.00', 'Yesterday'),
         _Movement('Salary', '+\$1500.00', '2 days ago'),
@@ -116,24 +119,24 @@ class _CardViewState extends State<CardView> {
         _Movement('Gym Membership', '-\$45.00', '1 week ago'),
       ],
     ),
-    _CardData(
-      svgAsset: 'assets/card_yellow.svg',
-      available: 320.40,
-      name: 'Maria Smith',
-      lastDigits: '****3921',
-      history: [
-        _Movement('Online Shopping', '-\$32.00', 'Today'),
-        _Movement('Transfer Received', '+\$200.00', 'Yesterday'),
-        _Movement('Supermarket', '-\$54.60', '3 days ago'),
-        _Movement('Spotify', '-\$9.99', '3 days ago'),
-        _Movement('Taxi', '-\$14.00', '4 days ago'),
-        _Movement('Coffee Shop', '-\$5.20', '5 days ago'),
-        _Movement('Gift Received', '+\$50.00', '6 days ago'),
-        _Movement('Restaurant', '-\$38.00', '6 days ago'),
-        _Movement('Pharmacy', '-\$11.50', '1 week ago'),
-        _Movement('Gym Membership', '-\$45.00', '1 week ago'),
-      ],
-    ),
+    // _CardData(
+    //   svgAsset: 'assets/card_yellow.svg',
+    //   available: 320.40,
+    //   name: 'Maria Smith',
+    //   lastDigits: '****3921',
+    //   history: [
+    //     _Movement('Online Shopping', '-\$32.00', 'Today'),
+    //     _Movement('Transfer Received', '+\$200.00', 'Yesterday'),
+    //     _Movement('Supermarket', '-\$54.60', '3 days ago'),
+    //     _Movement('Spotify', '-\$9.99', '3 days ago'),
+    //     _Movement('Taxi', '-\$14.00', '4 days ago'),
+    //     _Movement('Coffee Shop', '-\$5.20', '5 days ago'),
+    //     _Movement('Gift Received', '+\$50.00', '6 days ago'),
+    //     _Movement('Restaurant', '-\$38.00', '6 days ago'),
+    //     _Movement('Pharmacy', '-\$11.50', '1 week ago'),
+    //     _Movement('Gym Membership', '-\$45.00', '1 week ago'),
+    //   ],
+    // ),
   ];
 
   @override
@@ -339,45 +342,48 @@ class _CardViewState extends State<CardView> {
                       ),
                     ),
                     const SizedBox(height: 12),
-                    ...card.history.map(
-                      (m) => Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              m.title,
-                              style: TextStyle(
-                                color: colorScheme.onSurface,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                              ),
+                    ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: card.history.length,
+                      separatorBuilder: (_, __) =>
+                          const Divider(height: 1, thickness: 0.5),
+                      itemBuilder: (context, idx) {
+                        final m = card.history[idx];
+                        final isNegative = m.amount.startsWith('-');
+                        final isPositive = m.amount.startsWith('+');
+                        IconData icon;
+                        Color iconColor;
+                        if (isNegative) {
+                          icon = Icons.arrow_upward;
+                          iconColor = Colors.redAccent;
+                        } else if (isPositive) {
+                          icon = Icons.arrow_downward;
+                          iconColor = Colors.green;
+                        } else {
+                          icon = Icons.swap_horiz;
+                          iconColor = colorScheme.primary;
+                        }
+                        return ListTile(
+                          leading: CircleAvatar(
+                            backgroundColor: iconColor.withOpacity(0.15),
+                            child: Icon(icon, color: iconColor),
+                          ),
+                          title: Text(
+                            m.title,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: Text(m.date),
+                          trailing: Text(
+                            m.amount,
+                            style: TextStyle(
+                              color: iconColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(
-                                  m.amount,
-                                  style: TextStyle(
-                                    color: m.amount.startsWith('-')
-                                        ? Colors.red
-                                        : Colors.green,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                Text(
-                                  m.date,
-                                  style: TextStyle(
-                                    color: colorScheme.onSurface.withAlpha(128),
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),
