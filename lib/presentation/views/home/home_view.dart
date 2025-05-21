@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'widgets/home_action_card.dart';
+import 'widgets/quick_action_button.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -162,25 +164,25 @@ class _HomeViewState extends State<HomeView> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          _QuickActionButton(
+                          QuickActionButton(
                             icon: Icons.download,
                             label: 'Deposit',
                             color: Colors.white,
                             onTap: () {},
                           ),
-                          _QuickActionButton(
+                          QuickActionButton(
                             icon: Icons.swap_horiz,
                             label: 'Exchange',
                             color: Colors.white,
                             onTap: () {},
                           ),
-                          _QuickActionButton(
+                          QuickActionButton(
                             icon: Icons.upload,
                             label: 'Withdraw',
                             color: Colors.white,
                             onTap: () {},
                           ),
-                          _QuickActionButton(
+                          QuickActionButton(
                             icon: Icons.credit_card,
                             label: 'Your CVU',
                             color: Colors.white,
@@ -201,28 +203,28 @@ class _HomeViewState extends State<HomeView> {
                         crossAxisSpacing: 20,
                         childAspectRatio: 0.95,
                         children: [
-                          _HomeActionCard(
+                          HomeActionCard(
                             title: 'Transfer',
                             icon: Icons.sync_alt,
                             description: 'Transfer your funds',
                             onTap: () {},
                             colorScheme: colorScheme,
                           ),
-                          _HomeActionCard(
+                          HomeActionCard(
                             title: 'Buy & Sell',
                             icon: Icons.swap_horiz,
                             description: 'Buy and sell assets',
                             onTap: () {},
                             colorScheme: colorScheme,
                           ),
-                          _HomeActionCard(
+                          HomeActionCard(
                             title: 'Ocean Card',
                             icon: Icons.credit_card,
                             description: 'Manage your card',
                             onTap: () {},
                             colorScheme: colorScheme,
                           ),
-                          _HomeActionCard(
+                          HomeActionCard(
                             title: 'Earn Money',
                             icon: Icons.monetization_on,
                             description: 'Invite and earn rewards',
@@ -236,112 +238,6 @@ class _HomeViewState extends State<HomeView> {
                 ),
               ),
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _QuickActionButton extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final Color color;
-  final VoidCallback onTap;
-
-  const _QuickActionButton({
-    required this.icon,
-    required this.label,
-    required this.color,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        IconButton(
-          icon: Icon(icon, color: color, size: 32),
-          onPressed: onTap,
-        ),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          style: TextStyle(
-            color: color,
-            fontWeight: FontWeight.w500,
-            fontSize: 13,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _HomeActionCard extends StatelessWidget {
-  final String title;
-  final IconData icon;
-  final String description;
-  final VoidCallback onTap;
-  final ColorScheme colorScheme;
-
-  const _HomeActionCard({
-    required this.title,
-    required this.icon,
-    required this.description,
-    required this.onTap,
-    required this.colorScheme,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: colorScheme.primaryContainer.withValues(alpha: 0.3),
-      borderRadius: BorderRadius.circular(24),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(24),
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // Title and action button
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: colorScheme.onSurface,
-                    ),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.chevron_right),
-                    color: colorScheme.primary,
-                    onPressed: onTap,
-                  ),
-                ],
-              ),
-              // Central icon
-              Expanded(
-                child: Center(
-                  child: Icon(icon, size: 56, color: colorScheme.primary),
-                ),
-              ),
-              // Bottom description
-              Text(
-                description,
-                style: TextStyle(
-                  fontWeight: FontWeight.w100,
-                  fontSize: 14,
-                  color: colorScheme.onSurface.withAlpha(128),
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ],
           ),
         ),
       ),
