@@ -7,8 +7,8 @@ echo "🚀 Iniciando build para GitHub Pages..."
 
 # Verificar que estemos en la rama principal
 BRANCH=$(git branch --show-current)
-if [ "$BRANCH" != "main" ]; then
-    echo "⚠️  Advertencia: No estás en la rama 'main'. Rama actual: $BRANCH"
+if [ "$BRANCH" != "master" ]; then
+    echo "⚠️  Advertencia: No estás en la rama 'master'. Rama actual: $BRANCH"
     read -p "¿Continuar de todos modos? (y/n): " -n 1 -r
     echo
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
@@ -41,7 +41,7 @@ if [ $? -eq 0 ]; then
     echo "Para hacer deploy automático, haz:"
     echo "  git add ."
     echo "  git commit -m 'Update app'"
-    echo "  git push origin main"
+    echo "  git push origin master"
     echo ""
     echo "O sube los archivos manualmente desde ./build/web a GitHub Pages"
 else
