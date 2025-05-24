@@ -31,7 +31,7 @@ flutter config --enable-web
 
 # Hacer build para web
 echo "🔨 Construyendo aplicación web..."
-flutter build web --release --web-renderer html --base-href "/ocean_card/"
+flutter build web --release --base-href "/ocean_card/"
 
 # Verificar que el build fue exitoso
 if [ $? -eq 0 ]; then
