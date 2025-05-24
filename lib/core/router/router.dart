@@ -25,7 +25,7 @@ CustomTransitionPage customTransitionPage(Widget child, GoRouterState state) {
 
 GoRouter createAppRouter() {
   return GoRouter(
-    initialLocation: '/home',
+    initialLocation: '/login',
     routes: [
       // ShellRoute para envolver las rutas principales con el Navegador
       ShellRoute(

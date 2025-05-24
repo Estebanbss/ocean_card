@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ocean_card/core/configuration/tema/tema_cubit.dart';
 import 'package:ocean_card/presentation/views/actions/actions.dart';
+import 'package:ocean_card/presentation/views/actions/reports_view.dart';
 import 'widgets/home_action_card.dart';
 import 'widgets/quick_action_button.dart';
 
@@ -23,7 +22,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final router = GoRouter.of(context);
+    GoRouter.of(context);
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
@@ -331,20 +330,7 @@ class _HomeViewState extends State<HomeView> {
                                 ),
                                 colorScheme: colorScheme,
                               ),
-                              BlocBuilder<TemaCubit, bool>(
-                                builder: (context, state) {
-                                  return HomeActionCard(
-                                    title: 'Ocean Card',
-                                    icon: Icons.credit_card,
-                                    svgIconPath: state
-                                        ? 'assets/card_yellow.svg'
-                                        : 'assets/card_black.svg',
-                                    description: 'Manage your card',
-                                    onTap: () => router.go('/card'),
-                                    colorScheme: colorScheme,
-                                  );
-                                },
-                              ),
+
                               HomeActionCard(
                                 title: 'Earn Money',
                                 icon: Icons.monetization_on,
@@ -352,6 +338,17 @@ class _HomeViewState extends State<HomeView> {
                                 onTap: () => Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (_) => const EarnMoneyView(),
+                                  ),
+                                ),
+                                colorScheme: colorScheme,
+                              ),
+                              HomeActionCard(
+                                title: 'Reports',
+                                icon: Icons.analytics,
+                                description: 'View spending reports',
+                                onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => const ReportsView(),
                                   ),
                                 ),
                                 colorScheme: colorScheme,
