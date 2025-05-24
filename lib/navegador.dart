@@ -23,32 +23,38 @@ class HomeScreenState extends State<Navegador> {
   @override
   void initState() {
     super.initState();
-    _updateSelectedIndexFromRoute();
+    // Sync navigation index with current route on initialization
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final index = _getCurrentIndexFromRoute();
+      if (index != _selectedIndex) {
+        setState(() {
+          _selectedIndex = index;
+        });
+      }
+    });
   }
 
-  void _updateSelectedIndexFromRoute() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+  int _getCurrentIndexFromRoute() {
+    try {
       final location = GoRouter.of(
         context,
       ).routerDelegate.currentConfiguration.fullPath;
       final parts = location.split('/');
 
       if (parts.length > 1) {
-        int newIndex = _selectedIndex;
         switch (parts[1]) {
           case 'home':
-            newIndex = 0;
-            break;
+            return 0;
           case 'card':
-            newIndex = 1;
-            break;
-        }
-
-        if (_selectedIndex != newIndex) {
-          setState(() => _selectedIndex = newIndex);
+            return 1;
+          default:
+            return 0;
         }
       }
-    });
+      return 0;
+    } catch (e) {
+      return 0;
+    }
   }
 
   void _onItemTapped(int index) {
@@ -200,6 +206,18 @@ class HomeScreenState extends State<Navegador> {
 
   @override
   Widget build(BuildContext context) {
+    // Sync navigation index with current route whenever the widget rebuilds
+    final currentIndex = _getCurrentIndexFromRoute();
+    if (currentIndex != _selectedIndex) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          setState(() {
+            _selectedIndex = currentIndex;
+          });
+        }
+      });
+    }
+
     return BlocBuilder<TemaCubit, bool>(
       builder: (context, isDarkTheme) {
         return Scaffold(
