@@ -17,7 +17,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   bool _showBalance = true;
   String _selectedCurrency = 'USD';
-  final int _selectionStyle = 2; // 1 = full cards, 2 = selection buttons
+  final int _selectionStyle = 1; // 1 = full cards, 2 = selection buttons
 
   final List<Map<String, dynamic>> _currencies = [
     {
