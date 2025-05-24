@@ -22,8 +22,7 @@ jobs:
                - name: Setup Flutter
                  uses: subosito/flutter-action@v2
                  with:
-                      flutter-version: "3.19.0" # Especifica la versión de Flutter que usas
-                      channel: "stable"
+                      channel: "master" # Usando canal master como en tu entorno local
 
                - name: Get dependencies
                  run: flutter pub get
@@ -32,7 +31,7 @@ jobs:
                  run: flutter config --enable-web
 
                - name: Build web app
-                 run: flutter build web --release --web-renderer html --base-href "/ocean_card/"
+                 run: flutter build web --release --base-href "/ocean_card/"
 
                - name: Setup Pages
                  uses: actions/configure-pages@v4
