@@ -439,7 +439,6 @@ class _StatCard extends StatelessWidget {
 class _RecentActivityList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
     final activities = [
       {
         'icon': Icons.arrow_upward,
@@ -460,7 +459,7 @@ class _RecentActivityList extends StatelessWidget {
         'title': 'Amazon',
         'subtitle': '3 days ago',
         'amount': '-\$80.00',
-        'color': colorScheme.primary,
+        'color': Colors.redAccent,
       },
     ];
 
