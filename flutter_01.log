@@ -1,0 +1,87 @@
+Flutter crash report.
+Please report a bug at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter build web
+
+## exception
+
+PathNotFoundException: PathNotFoundException: Cannot open file, path = '/home/teban/development/flutter/version' (OS Error: No such file or directory, errno = 2)
+
+```
+#0      _File.throwIfError (dart:io/file_impl.dart:783:7)
+#1      _File.openSync (dart:io/file_impl.dart:576:5)
+#2      _File.readAsBytesSync (dart:io/file_impl.dart:664:18)
+#3      _File.readAsStringSync (dart:io/file_impl.dart:719:18)
+#4      ForwardingFile.readAsStringSync (package:file/src/forwarding/forwarding_file.dart:99:16)
+#5      ErrorHandlingFile.readAsStringSync.<anonymous closure> (package:flutter_tools/src/base/error_handling_io.dart:212:22)
+#6      _runSync (package:flutter_tools/src/base/error_handling_io.dart:549:14)
+#7      ErrorHandlingFile.readAsStringSync (package:flutter_tools/src/base/error_handling_io.dart:211:12)
+#8      _DefaultPub._updateVersionAndPackageConfig (package:flutter_tools/src/dart/pub.dart:681:50)
+#9      _DefaultPub.get (package:flutter_tools/src/dart/pub.dart:345:11)
+<asynchronous suspension>
+#10     FlutterCommand.verifyThenRunCommand (package:flutter_tools/src/runner/flutter_command.dart:1844:7)
+<asynchronous suspension>
+#11     FlutterCommand.run.<anonymous closure> (package:flutter_tools/src/runner/flutter_command.dart:1524:27)
+<asynchronous suspension>
+#12     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+<asynchronous suspension>
+#13     CommandRunner.runCommand (package:args/command_runner.dart:212:13)
+<asynchronous suspension>
+#14     FlutterCommandRunner.runCommand.<anonymous closure> (package:flutter_tools/src/runner/flutter_command_runner.dart:501:9)
+<asynchronous suspension>
+#15     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+<asynchronous suspension>
+#16     FlutterCommandRunner.runCommand (package:flutter_tools/src/runner/flutter_command_runner.dart:438:5)
+<asynchronous suspension>
+#17     run.<anonymous closure>.<anonymous closure> (package:flutter_tools/runner.dart:98:11)
+<asynchronous suspension>
+#18     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+<asynchronous suspension>
+#19     main (package:flutter_tools/executable.dart:113:3)
+<asynchronous suspension>
+```
+
+## flutter doctor
+
+```
+[32m[✓][39m Flutter (Channel master, 3.33.0-1.0.pre.209, on Arch Linux 6.14.6-arch1-1, locale en_US.UTF-8) [2.5s]
+    [32m•[39m Flutter version 3.33.0-1.0.pre.209 on channel master at /home/teban/development/flutter
+    [32m•[39m Upstream repository https://github.com/flutter/flutter.git
+    [32m•[39m Framework revision 60050a0b4d (2 hours ago), 2025-05-24 10:30:22 -0400
+    [32m•[39m Engine revision 60050a0b4d
+    [32m•[39m Dart version 3.9.0 (build 3.9.0-169.0.dev)
+    [32m•[39m DevTools version 2.46.0
+
+[32m[✓][39m Android toolchain - develop for Android devices (Android SDK version 36.0.0) [2.6s]
+    [32m•[39m Android SDK at /home/teban/Android/Sdk
+    [32m•[39m Emulator version 35.4.9.0 (build_id 13025442) (CL:N/A)
+    [32m•[39m Platform android-36, build-tools 36.0.0
+    [32m•[39m Java binary at: /opt/android-studio/jbr/bin/java
+      This is the JDK bundled with the latest Android Studio installation on this machine.
+      To manually set the JDK path, use: `flutter config --jdk-dir="path/to/jdk"`.
+    [32m•[39m Java version OpenJDK Runtime Environment (build 21.0.6+-13368085-b895.109)
+    [32m•[39m All Android licenses accepted.
+
+[32m[✓][39m Chrome - develop for the web [17ms]
+    [32m•[39m CHROME_EXECUTABLE = /opt/google/chrome/google-chrome
+
+[33m[!][39m Android Studio (version unknown) [14ms]
+    [32m•[39m Android Studio at /opt/android-studio
+    [32m•[39m Flutter plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/9212-flutter
+    [32m•[39m Dart plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/6351-dart
+    [31m✗[39m Unable to determine Android Studio version.
+    [32m•[39m android-studio-dir = /opt/android-studio
+    [32m•[39m Java version OpenJDK Runtime Environment (build 21.0.6+-13368085-b895.109)
+
+[32m[✓][39m Connected device (1 available) [219ms]
+    [32m•[39m Chrome (web) • chrome • web-javascript • Google Chrome 136.0.7103.113
+
+[32m[✓][39m Network resources [654ms]
+    [32m•[39m All expected network resources are available.
+
+[33m![39m Doctor found issues in 1 category.
+```
