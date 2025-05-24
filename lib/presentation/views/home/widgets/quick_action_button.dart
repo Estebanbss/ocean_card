@@ -19,6 +19,7 @@ class QuickActionButton extends StatelessWidget {
     return Column(
       children: [
         IconButton(
+          hoverColor: color.withValues(alpha: 0.2),
           icon: Icon(icon, color: color, size: 32),
           onPressed: onTap,
         ),

@@ -27,51 +27,69 @@ class HomeActionCard extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(24),
         onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.all(20),
+        child: Container(
+          constraints: const BoxConstraints(minHeight: 120, maxHeight: 200),
+          padding: const EdgeInsets.all(16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.max,
             children: [
               // Title and action button
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: colorScheme.onSurface,
+                  Expanded(
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: colorScheme.onSurface,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                     ),
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.chevron_right),
-                    color: colorScheme.primary,
-                    onPressed: onTap,
+                  const SizedBox(width: 8),
+                  Container(
+                    width: 32,
+                    height: 32,
+                    decoration: BoxDecoration(
+                      color: colorScheme.primary.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Icon(
+                      Icons.chevron_right,
+                      color: colorScheme.primary,
+                      size: 20,
+                    ),
                   ),
                 ],
               ),
+              const SizedBox(height: 12),
               // Central icon
               Expanded(
                 child: Center(
-                  child: svgIconPath != null && svgIconPath!.isNotEmpty
-                      ? SvgPicture.asset(
-                          svgIconPath!,
-                      
-                          
-                        )
-                      : Icon(icon, size: 56, color: colorScheme.primary),
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(),
+                    child: svgIconPath != null && svgIconPath!.isNotEmpty
+                        ? SvgPicture.asset(svgIconPath!, fit: BoxFit.contain)
+                        : Icon(icon, size: 48, color: colorScheme.primary),
+                  ),
                 ),
               ),
+              const SizedBox(height: 12),
               // Bottom description
               Text(
                 description,
                 style: TextStyle(
-                  fontWeight: FontWeight.w100,
-                  fontSize: 14,
-                  color: colorScheme.onSurface.withAlpha(128),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 12,
+                  color: colorScheme.onSurface.withValues(alpha: 0.7),
                 ),
                 textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),

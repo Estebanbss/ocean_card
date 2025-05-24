@@ -246,6 +246,13 @@ class HomeScreenState extends State<Navegador> {
                           Icons.waving_hand,
                           color: Colors.amber,
                           size: 22,
+                          shadows: [
+                            Shadow(
+                              color: Color.fromARGB(255, 89, 29, 10),
+                              offset: Offset(0, 0),
+                              blurRadius: 4,
+                            ),
+                          ],
                         ),
                       ],
                     ),

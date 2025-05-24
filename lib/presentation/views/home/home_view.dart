@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ocean_card/core/configuration/tema/tema_cubit.dart';
+import 'package:ocean_card/presentation/views/actions/actions.dart';
 import 'widgets/home_action_card.dart';
 import 'widgets/quick_action_button.dart';
 
@@ -134,7 +137,11 @@ class _HomeViewState extends State<HomeView> {
                             width: double.infinity,
                             child: ElevatedButton.icon(
                               onPressed: () {
-                                router.go('/add-funds');
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => const AddFundsView(),
+                                  ),
+                                );
                               },
                               icon: const Icon(Icons.add, color: Colors.white),
                               label: const Text(
@@ -172,28 +179,42 @@ class _HomeViewState extends State<HomeView> {
                     const SizedBox(height: 24),
 
                     // Estadísticas rápidas
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        _StatCard(
-                          icon: Icons.compare_arrows,
-                          label: 'Movements',
-                          value: '12',
-                          color: colorScheme.secondary,
-                        ),
-                        _StatCard(
-                          icon: Icons.credit_card,
-                          label: 'Cards',
-                          value: '1',
-                          color: colorScheme.primary,
-                        ),
-                        _StatCard(
-                          icon: Icons.card_giftcard,
-                          label: 'Rewards',
-                          value: '\$50',
-                          color: colorScheme.tertiary,
-                        ),
-                      ],
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          return Row(
+                            children: [
+                              Expanded(
+                                child: _StatCard(
+                                  icon: Icons.compare_arrows,
+                                  label: 'Movements',
+                                  value: '12',
+                                  color: colorScheme.primary,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: _StatCard(
+                                  icon: Icons.credit_card,
+                                  label: 'Cards',
+                                  value: '1',
+                                  color: colorScheme.primary,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: _StatCard(
+                                  icon: Icons.card_giftcard,
+                                  label: 'Rewards',
+                                  value: '\$50',
+                                  color: colorScheme.primary,
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
                     ),
                     const SizedBox(height: 28),
 
@@ -214,25 +235,41 @@ class _HomeViewState extends State<HomeView> {
                             icon: Icons.download,
                             label: 'Deposit',
                             color: Colors.white,
-                            onTap: () => router.go('/deposit'),
+                            onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => const DepositView(),
+                              ),
+                            ),
                           ),
                           QuickActionButton(
                             icon: Icons.swap_horiz,
                             label: 'Exchange',
                             color: Colors.white,
-                            onTap: () => router.go('/exchange'),
+                            onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => const ExchangeView(),
+                              ),
+                            ),
                           ),
                           QuickActionButton(
                             icon: Icons.upload,
                             label: 'Withdraw',
                             color: Colors.white,
-                            onTap: () => router.go('/withdraw'),
+                            onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => const WithdrawView(),
+                              ),
+                            ),
                           ),
                           QuickActionButton(
                             icon: Icons.credit_card,
                             label: 'Your CVU',
                             color: Colors.white,
-                            onTap: () => router.go('/cvu'),
+                            onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => const CvuView(),
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -254,44 +291,74 @@ class _HomeViewState extends State<HomeView> {
                     // Actions grid
                     Container(
                       margin: const EdgeInsets.only(top: 32),
-                      child: GridView.count(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 20,
-                        crossAxisSpacing: 20,
-                        childAspectRatio: 0.95,
-                        children: [
-                          HomeActionCard(
-                            title: 'Transfer',
-                            icon: Icons.sync_alt,
-                            description: 'Transfer your funds',
-                            onTap: () => router.go('/transfer'),
-                            colorScheme: colorScheme,
-                          ),
-                          HomeActionCard(
-                            title: 'Buy & Sell',
-                            icon: Icons.swap_horiz,
-                            description: 'Buy and sell assets',
-                            onTap: () => router.go('/buy-sell'),
-                            colorScheme: colorScheme,
-                          ),
-                          HomeActionCard(
-                            title: 'Ocean Card',
-                            icon: Icons.credit_card,
-                            svgIconPath: 'assets/card_black.svg',
-                            description: 'Manage your card',
-                            onTap: () => router.go('/card'),
-                            colorScheme: colorScheme,
-                          ),
-                          HomeActionCard(
-                            title: 'Earn Money',
-                            icon: Icons.monetization_on,
-                            description: 'Invite and earn rewards',
-                            onTap: () => router.go('/earn-money'),
-                            colorScheme: colorScheme,
-                          ),
-                        ],
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          // Determinar número de columnas basado en el ancho
+                          int crossAxisCount = constraints.maxWidth > 600
+                              ? 2
+                              : 1;
+                          double aspectRatio = constraints.maxWidth > 600
+                              ? 1.1
+                              : 1.3;
+
+                          return GridView.count(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            crossAxisCount: crossAxisCount,
+                            mainAxisSpacing: 16,
+                            crossAxisSpacing: 16,
+                            childAspectRatio: aspectRatio,
+                            children: [
+                              HomeActionCard(
+                                title: 'Transfer',
+                                icon: Icons.sync_alt,
+                                description: 'Transfer your funds',
+                                onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => const TransferView(),
+                                  ),
+                                ),
+                                colorScheme: colorScheme,
+                              ),
+                              HomeActionCard(
+                                title: 'Buy & Sell',
+                                icon: Icons.swap_horiz,
+                                description: 'Buy and sell assets',
+                                onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => const BuySellView(),
+                                  ),
+                                ),
+                                colorScheme: colorScheme,
+                              ),
+                              BlocBuilder<TemaCubit, bool>(
+                                builder: (context, state) {
+                                  return HomeActionCard(
+                                    title: 'Ocean Card',
+                                    icon: Icons.credit_card,
+                                    svgIconPath: state
+                                        ? 'assets/card_yellow.svg'
+                                        : 'assets/card_black.svg',
+                                    description: 'Manage your card',
+                                    onTap: () => router.go('/card'),
+                                    colorScheme: colorScheme,
+                                  );
+                                },
+                              ),
+                              HomeActionCard(
+                                title: 'Earn Money',
+                                icon: Icons.monetization_on,
+                                description: 'Invite and earn rewards',
+                                onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => const EarnMoneyView(),
+                                  ),
+                                ),
+                                colorScheme: colorScheme,
+                              ),
+                            ],
+                          );
+                        },
                       ),
                     ),
                   ],
@@ -324,27 +391,41 @@ class _StatCard extends StatelessWidget {
     return Card(
       elevation: 0,
       color: color.withValues(alpha: 0.08),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 22),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      child: Container(
+        constraints: const BoxConstraints(minHeight: 80, maxHeight: 120),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: color, size: 28),
-            const SizedBox(height: 8),
-            Text(
-              value,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: color,
+            Icon(icon, color: color, size: 24),
+            const SizedBox(height: 6),
+            Flexible(
+              child: Text(
+                value,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: color,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
               ),
             ),
-            Text(
-              label,
-              style: TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 13,
-                color: color.withAlpha(180),
+            const SizedBox(height: 2),
+            Flexible(
+              child: Text(
+                label,
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 11,
+                  color: color.withValues(alpha: 0.7),
+                ),
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ],
