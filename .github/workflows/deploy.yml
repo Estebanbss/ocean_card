@@ -1,47 +1,47 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches:
-      - main  # Cambia esto por tu rama principal si es diferente
-  workflow_dispatch:  # Permite ejecutar manualmente el workflow
+     push:
+          branches:
+               - main # Cambia esto por tu rama principal si es diferente
+     workflow_dispatch: # Permite ejecutar manualmente el workflow
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.19.0'  # Especifica la versión de Flutter que usas
-          channel: 'stable'
-          
-      - name: Get dependencies
-        run: flutter pub get
-        
-      - name: Enable web platform
-        run: flutter config --enable-web
-        
-      - name: Build web app
-        run: flutter build web --release --web-renderer html --base-href "/ocean_card/"
-        
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-        
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './build/web'
-          
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+     build-and-deploy:
+          runs-on: ubuntu-latest
+
+          permissions:
+               contents: read
+               pages: write
+               id-token: write
+
+          steps:
+               - name: Checkout repository
+                 uses: actions/checkout@v4
+
+               - name: Setup Flutter
+                 uses: subosito/flutter-action@v2
+                 with:
+                      flutter-version: "3.19.0" # Especifica la versión de Flutter que usas
+                      channel: "stable"
+
+               - name: Get dependencies
+                 run: flutter pub get
+
+               - name: Enable web platform
+                 run: flutter config --enable-web
+
+               - name: Build web app
+                 run: flutter build web --release --web-renderer html --base-href "/ocean_card/"
+
+               - name: Setup Pages
+                 uses: actions/configure-pages@v4
+
+               - name: Upload artifact
+                 uses: actions/upload-pages-artifact@v3
+                 with:
+                      path: "./build/web"
+
+               - name: Deploy to GitHub Pages
+                 id: deployment
+                 uses: actions/deploy-pages@v4
