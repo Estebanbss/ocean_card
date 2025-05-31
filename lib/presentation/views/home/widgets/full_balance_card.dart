@@ -45,15 +45,17 @@ class FullBalanceCard extends StatelessWidget {
 
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.15),
+        color: isSelected
+            ? colorScheme.primaryContainer
+            : colorScheme.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: Colors.white.withValues(alpha: 0.3),
+          color: isSelected ? colorScheme.primary : colorScheme.outline,
           width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
+            color: colorScheme.shadow.withValues(alpha: 0.1),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -71,7 +73,9 @@ class FullBalanceCard extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: Colors.white.withValues(alpha: 0.9),
+                  color: isSelected
+                      ? colorScheme.onPrimaryContainer
+                      : colorScheme.onSurface,
                 ),
               ),
               Container(
@@ -80,19 +84,18 @@ class FullBalanceCard extends StatelessWidget {
                   vertical: 5,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.2),
+                  color: colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(14),
-                  border: Border.all(
-                    color: Colors.white.withValues(alpha: 0.3),
-                    width: 1,
-                  ),
+                  border: Border.all(color: colorScheme.outline, width: 1),
                 ),
                 child: Text(
                   currency['code'],
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: isSelected
+                        ? colorScheme.onPrimaryContainer
+                        : colorScheme.onSurface,
                   ),
                 ),
               ),
@@ -113,7 +116,9 @@ class FullBalanceCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: isSelected
+                            ? colorScheme.onPrimaryContainer
+                            : colorScheme.onSurface,
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -122,14 +127,22 @@ class FullBalanceCard extends StatelessWidget {
                         '\$${balanceUSD.toStringAsFixed(2)}',
                         style: TextStyle(
                           fontSize: 14,
-                          color: Colors.white.withValues(alpha: 0.7),
+                          color: isSelected
+                              ? colorScheme.onPrimaryContainer.withValues(
+                                  alpha: 0.7,
+                                )
+                              : colorScheme.onSurfaceVariant,
                         ),
                       ),
                     Text(
                       _balanceSubtitle,
                       style: TextStyle(
                         fontSize: 12,
-                        color: Colors.white.withValues(alpha: 0.6),
+                        color: isSelected
+                            ? colorScheme.onPrimaryContainer.withValues(
+                                alpha: 0.6,
+                              )
+                            : colorScheme.outline,
                       ),
                     ),
                   ],
@@ -137,22 +150,15 @@ class FullBalanceCard extends StatelessWidget {
               ),
 
               // Currency avatar
-              Container(
+              SizedBox(
                 width: 50,
                 height: 50,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white.withValues(alpha: 0.2),
-                  border: Border.all(
-                    color: Colors.white.withValues(alpha: 0.4),
-                    width: 2,
-                  ),
-                ),
+
                 child: Center(
                   child: SvgPicture.asset(
                     currency['svgAsset'],
-                    width: 28,
-                    height: 28,
+                    width: 32,
+                    height: 32,
                   ),
                 ),
               ),

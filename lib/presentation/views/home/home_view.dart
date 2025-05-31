@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ocean_card/presentation/views/actions/actions.dart';
-import 'package:ocean_card/presentation/views/actions/reports_view.dart';
 import 'widgets/balance_card.dart';
 import 'widgets/statistics_cards.dart';
-import 'widgets/quick_actions_container.dart';
-import 'widgets/recent_activity_list.dart';
-import 'widgets/actions_grid.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -85,7 +81,7 @@ class _HomeViewState extends State<HomeView> {
             child: Container(
               constraints: const BoxConstraints(maxWidth: 900),
               child: Padding(
-                padding: const EdgeInsets.all(24),
+                padding: const EdgeInsets.symmetric(vertical: 24),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -118,58 +114,18 @@ class _HomeViewState extends State<HomeView> {
                       selectionStyle:
                           _selectionStyle, // Pass the selection style
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 12),
 
                     // Statistics cards
-                    StatisticsCards(colorScheme: colorScheme),
-                    const SizedBox(height: 28),
-
-                    // Quick actions
-                    QuickActionsContainer(
-                      colorScheme: colorScheme,
-                      onDepositTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => const DepositView()),
-                      ),
-                      onExchangeTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => const ExchangeView()),
-                      ),
-                      onWithdrawTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => const WithdrawView()),
-                      ),
-                      onCvuTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => const CvuView()),
-                      ),
-                    ),
-                    const SizedBox(height: 32),
-
-                    // Recent activity header and list
-                    Text(
-                      'Recent Activity',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: colorScheme.onSurface,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    const RecentActivityList(),
-
-                    // Actions grid
-                    ActionsGrid(
-                      colorScheme: colorScheme,
-                      onTransferTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => const TransferView()),
-                      ),
-                      onBuySellTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => const BuySellView()),
-                      ),
-                      onEarnMoneyTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => const EarnMoneyView(),
-                        ),
-                      ),
-                      onReportsTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => const ReportsView()),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: Column(
+                        children: [
+                          // Quick actions
+                          StatisticsCards(colorScheme: colorScheme),
+                          const SizedBox(height: 16),
+                          const SizedBox(height: 32),
+                        ],
                       ),
                     ),
                   ],

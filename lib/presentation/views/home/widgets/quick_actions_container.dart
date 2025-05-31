@@ -20,12 +20,9 @@ class QuickActionsContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: 16,
-        horizontal: 12,
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
       decoration: BoxDecoration(
-        color: colorScheme.primary,
+        color: colorScheme.primaryContainer,
         borderRadius: BorderRadius.circular(24),
       ),
       child: Row(
@@ -34,25 +31,25 @@ class QuickActionsContainer extends StatelessWidget {
           QuickActionButton(
             icon: Icons.download,
             label: 'Deposit',
-            color: Colors.white,
+            color: colorScheme.onPrimaryContainer,
             onTap: onDepositTap,
           ),
           QuickActionButton(
             icon: Icons.swap_horiz,
             label: 'Exchange',
-            color: Colors.white,
+            color: colorScheme.onPrimaryContainer,
             onTap: onExchangeTap,
           ),
           QuickActionButton(
             icon: Icons.upload,
             label: 'Withdraw',
-            color: Colors.white,
+            color: colorScheme.onPrimaryContainer,
             onTap: onWithdrawTap,
           ),
           QuickActionButton(
             icon: Icons.credit_card,
             label: 'Your CVU',
-            color: Colors.white,
+            color: colorScheme.onPrimaryContainer,
             onTap: onCvuTap,
           ),
         ],

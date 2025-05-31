@@ -13,19 +13,23 @@ class CurrencyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.15),
+        color: isSelected
+            ? colorScheme.primaryContainer
+            : colorScheme.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(100),
         border: Border.all(
-          color: Colors.white.withValues(alpha: 0.3),
+          color: isSelected ? colorScheme.primary : colorScheme.outline,
           width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
+            color: colorScheme.shadow.withValues(alpha: 0.1),
             blurRadius: 6,
             offset: const Offset(0, 2),
           ),
@@ -39,7 +43,9 @@ class CurrencyCard extends StatelessWidget {
           Text(
             currency['code'],
             style: TextStyle(
-              color: Colors.white.withValues(alpha: 0.9),
+              color: isSelected
+                  ? colorScheme.onPrimaryContainer
+                  : colorScheme.onSurface,
               fontWeight: FontWeight.bold,
               fontSize: 14,
             ),

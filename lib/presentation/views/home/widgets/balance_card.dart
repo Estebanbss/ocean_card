@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ocean_card/presentation/views/actions/actions.dart';
+import 'package:ocean_card/presentation/views/home/widgets/quick_actions_container.dart';
 import 'selection_widget.dart';
 import 'currency_card.dart';
 import 'full_balance_card.dart';
@@ -38,18 +40,11 @@ class BalanceCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(28),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            colorScheme.primary,
-            colorScheme.secondary.withValues(alpha: 0.85),
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+        color: colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.primary.withValues(alpha: 0.18),
+            color: colorScheme.shadow.withValues(alpha: 0.1),
             blurRadius: 18,
             offset: const Offset(0, 8),
           ),
@@ -68,13 +63,13 @@ class BalanceCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w100,
-                    color: Colors.white.withAlpha(179),
+                    color: colorScheme.onSurfaceVariant,
                   ),
                 ),
                 IconButton(
                   icon: Icon(
                     showBalance ? Icons.visibility : Icons.visibility_off,
-                    color: Colors.white,
+                    color: colorScheme.onSurface,
                   ),
                   onPressed: onToggleVisibility,
                 ),
@@ -92,10 +87,10 @@ class BalanceCard extends StatelessWidget {
                     children: [
                       Text(
                         showBalance ? formattedBalance : '••••••',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 38,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: colorScheme.onSurface,
                         ),
                       ),
                       const SizedBox(height: 4),
@@ -104,14 +99,14 @@ class BalanceCard extends StatelessWidget {
                           '\$${balanceUSD.toStringAsFixed(2)}',
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.white.withAlpha(179),
+                            color: colorScheme.onSurfaceVariant,
                           ),
                         ),
                       Text(
                         balanceSubtitle,
                         style: TextStyle(
                           fontSize: 14,
-                          color: Colors.white.withAlpha(153),
+                          color: colorScheme.outline,
                         ),
                       ),
                     ],
@@ -124,11 +119,8 @@ class BalanceCard extends StatelessWidget {
                   height: 60,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.white.withAlpha(26),
-                    border: Border.all(
-                      color: Colors.white.withAlpha(76),
-                      width: 2,
-                    ),
+                    color: colorScheme.surfaceContainerHighest,
+                    border: Border.all(color: colorScheme.outline, width: 2),
                   ),
                   child: Center(
                     child: SvgPicture.asset(
@@ -180,34 +172,20 @@ class BalanceCard extends StatelessWidget {
           // Add space only if in card style, otherwise keep the existing spacing
           SizedBox(height: selectionStyle == 1 ? 8 : 18),
 
-          // Add funds button
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton.icon(
-              onPressed: onAddFunds,
-              icon: const Icon(Icons.add, color: Colors.white),
-              label: const Text(
-                'Add funds',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Colors.white,
-                ),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: colorScheme.primary.withAlpha(220),
-                foregroundColor: Colors.white,
-                side: BorderSide(
-                  color: colorScheme.onPrimary.withAlpha(128),
-                  width: 2,
-                ),
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(100)),
-                ),
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                elevation: 2,
-              ),
-            ),
+          QuickActionsContainer(
+            colorScheme: colorScheme,
+            onDepositTap: () => Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (_) => const DepositView())),
+            onExchangeTap: () => Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (_) => const ExchangeView())),
+            onWithdrawTap: () => Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (_) => const WithdrawView())),
+            onCvuTap: () => Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (_) => const CvuView())),
           ),
         ],
       ),
