@@ -45,14 +45,9 @@ class FullBalanceCard extends StatelessWidget {
 
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isSelected
-            ? colorScheme.primaryContainer
-            : colorScheme.surfaceContainerHigh,
+        color: colorScheme.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: isSelected ? colorScheme.primary : colorScheme.outline,
-          width: 1.5,
-        ),
+        border: Border.all(color: colorScheme.outline, width: 1.5),
         boxShadow: [
           BoxShadow(
             color: colorScheme.shadow.withValues(alpha: 0.1),
@@ -61,110 +56,102 @@ class FullBalanceCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Header con nombre de la moneda
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                currency['name'],
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: isSelected
-                      ? colorScheme.onPrimaryContainer
-                      : colorScheme.onSurface,
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 5,
-                ),
-                decoration: BoxDecoration(
-                  color: colorScheme.surfaceContainerHighest,
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: colorScheme.outline, width: 1),
-                ),
-                child: Text(
-                  currency['code'],
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header con nombre de la moneda
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  currency['name'],
                   style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: isSelected
-                        ? colorScheme.onPrimaryContainer
-                        : colorScheme.onSurface,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
                   ),
                 ),
-              ),
-            ],
-          ),
-
-          // Balance y avatar
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // Balance info
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      showBalance ? _formattedBalance : '••••••',
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: isSelected
-                            ? colorScheme.onPrimaryContainer
-                            : colorScheme.onSurface,
-                      ),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 5,
+                  ),
+                  decoration: BoxDecoration(
+                    color: colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(color: colorScheme.outline, width: 1),
+                  ),
+                  child: Text(
+                    currency['code'],
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onSurface,
                     ),
-                    const SizedBox(height: 4),
-                    if (showBalance && currency['code'] != 'USD')
+                  ),
+                ),
+              ],
+            ),
+
+            // Balance y avatar
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Balance info
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       Text(
-                        '\$${balanceUSD.toStringAsFixed(2)}',
+                        showBalance ? _formattedBalance : '••••••',
                         style: TextStyle(
-                          fontSize: 14,
-                          color: isSelected
-                              ? colorScheme.onPrimaryContainer.withValues(
-                                  alpha: 0.7,
-                                )
-                              : colorScheme.onSurfaceVariant,
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: colorScheme.onSurface,
                         ),
                       ),
-                    Text(
-                      _balanceSubtitle,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: isSelected
-                            ? colorScheme.onPrimaryContainer.withValues(
-                                alpha: 0.6,
-                              )
-                            : colorScheme.outline,
+                      const SizedBox(height: 4),
+                      if (showBalance && currency['code'] != 'USD')
+                        Text(
+                          '\$${balanceUSD.toStringAsFixed(2)}',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                      Text(
+                        _balanceSubtitle,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: colorScheme.outline,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Currency avatar
-              SizedBox(
-                width: 50,
-                height: 50,
-
-                child: Center(
-                  child: SvgPicture.asset(
-                    currency['svgAsset'],
-                    width: 32,
-                    height: 32,
+                    ],
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+
+                // Currency avatar
+                SizedBox(
+                  width: 50,
+                  height: 50,
+
+                  child: Center(
+                    child: SvgPicture.asset(
+                      currency['svgAsset'],
+                      width: 32,
+                      height: 32,
+                      colorFilter: ColorFilter.mode(
+                        colorScheme.onSurfaceVariant,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -25,34 +25,37 @@ class QuickActionsContainer extends StatelessWidget {
         color: colorScheme.primaryContainer,
         borderRadius: BorderRadius.circular(24),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          QuickActionButton(
-            icon: Icons.download,
-            label: 'Deposit',
-            color: colorScheme.onPrimaryContainer,
-            onTap: onDepositTap,
-          ),
-          QuickActionButton(
-            icon: Icons.swap_horiz,
-            label: 'Exchange',
-            color: colorScheme.onPrimaryContainer,
-            onTap: onExchangeTap,
-          ),
-          QuickActionButton(
-            icon: Icons.upload,
-            label: 'Withdraw',
-            color: colorScheme.onPrimaryContainer,
-            onTap: onWithdrawTap,
-          ),
-          QuickActionButton(
-            icon: Icons.credit_card,
-            label: 'Your CVU',
-            color: colorScheme.onPrimaryContainer,
-            onTap: onCvuTap,
-          ),
-        ],
+      child: SingleChildScrollView(
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            QuickActionButton(
+              icon: Icons.download,
+              label: 'Deposit',
+              color: colorScheme.onPrimary,
+              onTap: onDepositTap,
+            ),
+            QuickActionButton(
+              icon: Icons.swap_horiz,
+              label: 'Exchange',
+              color: colorScheme.onPrimary,
+              onTap: onExchangeTap,
+            ),
+            QuickActionButton(
+              icon: Icons.upload,
+              label: 'Withdraw',
+              color: colorScheme.onPrimary,
+              onTap: onWithdrawTap,
+            ),
+            QuickActionButton(
+              icon: Icons.credit_card,
+              label: 'Your CVU',
+              color: colorScheme.onPrimary,
+              onTap: onCvuTap,
+            ),
+          ],
+        ),
       ),
     );
   }

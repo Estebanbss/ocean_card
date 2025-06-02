@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ocean_card/presentation/views/actions/actions.dart';
-import 'package:ocean_card/presentation/views/actions/earn_money_view.dart';
 import 'package:ocean_card/presentation/views/actions/reports_view.dart';
 import 'package:ocean_card/presentation/views/home/widgets/recent_activity_list.dart';
 import 'widgets/balance_card.dart';
@@ -115,7 +114,6 @@ class _HomeViewState extends State<HomeView> {
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
-      appBar: AppBar(backgroundColor: colorScheme.surface, elevation: 0),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Align(

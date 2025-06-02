@@ -10,7 +10,6 @@ export 'earn_money_view.dart';
 import 'package:flutter/material.dart';
 import 'package:ocean_card/presentation/views/actions/earn_money_view.dart';
 import 'package:ocean_card/presentation/views/actions/reports_view.dart';
-import 'package:ocean_card/presentation/views/home/widgets/recent_activity_list.dart';
 import 'package:ocean_card/presentation/views/actions/movements_view.dart';
 import 'package:ocean_card/presentation/views/actions/trades_view.dart';
 import 'package:ocean_card/presentation/views/actions/defi_view.dart';

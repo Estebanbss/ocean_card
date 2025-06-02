@@ -99,37 +99,39 @@ class HomeScreenState extends State<Navegador> {
     );
   }
 
-  Widget _buildLogoutButton() {
-    return MouseRegion(
-      onEnter: (_) => setState(() => hoverLogout = true),
-      onExit: (_) => setState(() => hoverLogout = false),
-      child: AnimatedRotation(
-        duration: const Duration(milliseconds: 300),
-        turns: hoverLogout ? 0.05 : 0.0,
-        child: IconButton(
-          icon: Icon(
-            Icons.logout,
-            color: Theme.of(context).colorScheme.onPrimary,
-          ),
-          onPressed: () {
-            // context.read<AutenticacionBloc>().add(CerrarSesion());
-            GoRouter.of(context).go('/login');
-          },
-        ),
-      ),
-    );
-  }
+  // Widget _buildLogoutButton() {
+  //   return MouseRegion(
+  //     onEnter: (_) => setState(() => hoverLogout = true),
+  //     onExit: (_) => setState(() => hoverLogout = false),
+  //     child: AnimatedRotation(
+  //       duration: const Duration(milliseconds: 300),
+  //       turns: hoverLogout ? 0.05 : 0.0,
+  //       child: IconButton(
+  //         icon: Icon(
+  //           Icons.logout,
+  //           color: Theme.of(context).colorScheme.onPrimary,
+  //         ),
+  //         onPressed: () {
+  //           // context.read<AutenticacionBloc>().add(CerrarSesion());
+  //           GoRouter.of(context).go('/login');
+  //         },
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget _buildProfileMenu(BuildContext context) {
     return PopupMenuButton<int>(
-      icon: const Icon(Icons.account_circle, size: 32),
-      color: Theme.of(context).colorScheme.surface,
+      icon: Icon(
+        Icons.account_circle,
+        size: 32,
+        color: Theme.of(context).colorScheme.onPrimary,
+      ),
+      color: Theme.of(context).colorScheme.onPrimary,
       offset: const Offset(0, 48), // Aparece justo debajo del botón
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(18),
-        side: BorderSide(
-          color: Theme.of(context).colorScheme.outline.withOpacity(0.15),
-        ),
+        side: BorderSide(color: Theme.of(context).colorScheme.onPrimary),
       ),
       elevation: 12,
       padding: EdgeInsets.zero,
@@ -371,53 +373,55 @@ class HomeScreenState extends State<Navegador> {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             backgroundColor: Theme.of(context).colorScheme.primary,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Profile menu (left)
-                _buildProfileMenu(context),
-                // User greeting (right)
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      _getGreeting(),
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Theme.of(
-                          context,
-                        ).colorScheme.onPrimary.withValues(alpha: 0.7),
-                        fontWeight: FontWeight.w400,
+            title: SingleChildScrollView(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Profile menu (left)
+                  _buildProfileMenu(context),
+                  // User greeting (right)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        _getGreeting(),
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.onPrimary.withValues(alpha: 0.7),
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "Codes korede ",
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Theme.of(context).colorScheme.onPrimary,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const Icon(
-                          Icons.waving_hand,
-                          color: Colors.amber,
-                          size: 22,
-                          shadows: [
-                            Shadow(
-                              color: Color.fromARGB(255, 89, 29, 10),
-                              offset: Offset(0, 0),
-                              blurRadius: 4,
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "Codes korede ",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Theme.of(context).colorScheme.onPrimary,
+                              fontWeight: FontWeight.bold,
                             ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
+                          ),
+                          const Icon(
+                            Icons.waving_hand,
+                            color: Colors.amber,
+                            size: 22,
+                            shadows: [
+                              Shadow(
+                                color: Color.fromARGB(255, 89, 29, 10),
+                                offset: Offset(0, 0),
+                                blurRadius: 4,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
             actions: [_buildThemeButton(isDarkTheme)],
           ),
