@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:ocean_card/presentation/views/actions/actions.dart';
 
 class StatisticsCards extends StatelessWidget {
   final ColorScheme colorScheme;
+  final VoidCallback? onEarnMoney;
+  final VoidCallback? onReports;
+  final VoidCallback? onHistory;
 
-  const StatisticsCards({super.key, required this.colorScheme});
+  const StatisticsCards({
+    super.key,
+    required this.colorScheme,
+    this.onEarnMoney,
+    this.onReports,
+    this.onHistory,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +32,7 @@ class StatisticsCards extends StatelessWidget {
                       label: 'Movements',
                       value: '12',
                       color: colorScheme.primary,
+                      onTap: () => movementsAction(context),
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -31,6 +42,7 @@ class StatisticsCards extends StatelessWidget {
                       label: 'Trades',
                       value: '1',
                       color: colorScheme.primary,
+                      onTap: () => tradesAction(context),
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -40,6 +52,7 @@ class StatisticsCards extends StatelessWidget {
                       label: 'DeFi',
                       value: '3',
                       color: colorScheme.primary,
+                      onTap: () => defiAction(context),
                     ),
                   ),
                 ],
@@ -54,6 +67,7 @@ class StatisticsCards extends StatelessWidget {
                       label: 'Earn Money',
                       value: '\$50',
                       color: colorScheme.primary,
+                      onTap: () => earnMoneyAction(context),
                     ),
                   ),
                   Expanded(
@@ -62,6 +76,7 @@ class StatisticsCards extends StatelessWidget {
                       label: 'Buy & Sell',
                       value: '8',
                       color: colorScheme.primary,
+                      onTap: () => buySellAction(context),
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -71,6 +86,7 @@ class StatisticsCards extends StatelessWidget {
                       label: 'Reports',
                       value: '5',
                       color: colorScheme.primary,
+                      onTap: () => reportsAction(context),
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -80,6 +96,7 @@ class StatisticsCards extends StatelessWidget {
                       label: 'History',
                       value: '24',
                       color: colorScheme.primary,
+                      onTap: () => historyAction(context),
                     ),
                   ),
                 ],
@@ -97,6 +114,7 @@ class StatCard extends StatelessWidget {
   final String label;
   final String value;
   final Color color;
+  final VoidCallback? onTap;
 
   const StatCard({
     super.key,
@@ -104,53 +122,58 @@ class StatCard extends StatelessWidget {
     required this.label,
     required this.value,
     required this.color,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return Card(
-      elevation: 0,
-      color: colorScheme.surfaceContainer,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Container(
-        constraints: const BoxConstraints(minHeight: 80, maxHeight: 120),
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: color, size: 24),
-            const SizedBox(height: 6),
-            Flexible(
-              child: Text(
-                value,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: colorScheme.onSurface,
+    return InkWell(
+      borderRadius: BorderRadius.circular(16),
+      onTap: onTap,
+      child: Card(
+        elevation: 0,
+        color: colorScheme.surfaceContainer,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        child: Container(
+          constraints: const BoxConstraints(minHeight: 80, maxHeight: 120),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, color: color, size: 24),
+              const SizedBox(height: 6),
+              Flexible(
+                child: Text(
+                  value,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: colorScheme.onSurface,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
                 ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.center,
               ),
-            ),
-            const SizedBox(height: 2),
-            Flexible(
-              child: Text(
-                label,
-                style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 11,
-                  color: colorScheme.onSurfaceVariant,
+              const SizedBox(height: 2),
+              Flexible(
+                child: Text(
+                  label,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 11,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

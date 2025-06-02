@@ -35,10 +35,10 @@ class TransactionHistoryList extends StatelessWidget {
             Color iconColor;
             if (isNegative) {
               icon = Icons.arrow_upward;
-              iconColor = Colors.redAccent;
+              iconColor = colorScheme.error;
             } else if (isPositive) {
               icon = Icons.arrow_downward;
-              iconColor = Colors.green;
+              iconColor = colorScheme.secondary;
             } else {
               icon = Icons.swap_horiz;
               iconColor = colorScheme.primary;

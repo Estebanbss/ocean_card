@@ -23,7 +23,7 @@ class AvailableBalanceCard extends StatelessWidget {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w100,
-              color: Colors.white.withAlpha(179),
+              color: colorScheme.onPrimary.withAlpha(179),
             ),
           ),
           const SizedBox(height: 8),

@@ -8,8 +8,9 @@ class CvuView extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('CVU'),
+        title: Text('CVU', style: TextStyle(color: colorScheme.onPrimary)),
         backgroundColor: colorScheme.primary,
+        iconTheme: IconThemeData(color: colorScheme.onPrimary),
       ),
       body: Center(
         child: Padding(
@@ -21,18 +22,27 @@ class CvuView extends StatelessWidget {
               const SizedBox(height: 24),
               Text(
                 'Your CVU',
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: colorScheme.onSurface),
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  color: colorScheme.onSurface,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 12),
               Text(
                 'Your unique banking code for transfers and deposits.',
-                style: TextStyle(fontSize: 16, color: colorScheme.onSurface.withAlpha(180)),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: colorScheme.onSurface.withAlpha(180),
+                ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 32),
               SelectableText(
                 '0000-1234-5678-9012',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: colorScheme.primary),
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: colorScheme.primary,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                ),
               ),
             ],
           ),

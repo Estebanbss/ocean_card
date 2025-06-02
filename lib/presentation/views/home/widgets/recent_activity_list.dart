@@ -5,27 +5,28 @@ class RecentActivityList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final activities = [
       {
         'icon': Icons.arrow_upward,
         'title': 'Sent to John',
         'subtitle': 'Yesterday',
         'amount': '-\$120.00',
-        'color': Colors.redAccent,
+        'color': colorScheme.error,
       },
       {
         'icon': Icons.arrow_downward,
         'title': 'Deposit',
         'subtitle': '2 days ago',
         'amount': '+\$500.00',
-        'color': Colors.green,
+        'color': colorScheme.secondary,
       },
       {
         'icon': Icons.shopping_cart,
         'title': 'Amazon',
         'subtitle': '3 days ago',
         'amount': '-\$80.00',
-        'color': Colors.redAccent,
+        'color': colorScheme.error,
       },
     ];
 

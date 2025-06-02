@@ -8,32 +8,52 @@ class SettingsView extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Card Settings'),
+        title: Text(
+          'Card Settings',
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(color: colorScheme.onPrimary),
+        ),
         backgroundColor: colorScheme.primary,
+        iconTheme: IconThemeData(color: colorScheme.onPrimary),
       ),
       body: ListView(
         padding: const EdgeInsets.all(32),
         children: [
           ListTile(
             leading: Icon(Icons.lock, color: colorScheme.primary),
-            title: const Text('Change PIN'),
+            title: Text(
+              'Change PIN',
+              style: Theme.of(
+                context,
+              ).textTheme.bodyLarge?.copyWith(color: colorScheme.onSurface),
+            ),
             onTap: () {},
           ),
           ListTile(
             leading: Icon(Icons.visibility_off, color: colorScheme.primary),
-            title: const Text('Hide Card Number'),
+            title: Text(
+              'Hide Card Number',
+              style: Theme.of(
+                context,
+              ).textTheme.bodyLarge?.copyWith(color: colorScheme.onSurface),
+            ),
             onTap: () {},
           ),
           ListTile(
-            leading: Icon(Icons.delete, color: colorScheme.primary),
-            title: const Text('Delete Card'),
+            leading: Icon(Icons.delete, color: colorScheme.error),
+            title: Text(
+              'Delete Card',
+              style: Theme.of(
+                context,
+              ).textTheme.bodyLarge?.copyWith(color: colorScheme.error),
+            ),
             onTap: () {},
           ),
           const SizedBox(height: 24),
           Text(
             'Manage your card settings here.',
-            style: TextStyle(
-              fontSize: 16,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color: colorScheme.onSurface.withAlpha(180),
             ),
             textAlign: TextAlign.center,

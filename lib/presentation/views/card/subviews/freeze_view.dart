@@ -5,11 +5,19 @@ class FreezeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Freeze Card'),
+        title: Text(
+          'Freeze Card',
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(color: colorScheme.onPrimary),
+        ),
         backgroundColor: colorScheme.primary,
+        iconTheme: IconThemeData(color: colorScheme.onPrimary),
       ),
       body: Center(
         child: Column(
@@ -19,8 +27,7 @@ class FreezeView extends StatelessWidget {
             const SizedBox(height: 24),
             Text(
               'Freeze your card',
-              style: TextStyle(
-                fontSize: 24,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: colorScheme.onSurface,
               ),
@@ -28,25 +35,40 @@ class FreezeView extends StatelessWidget {
             const SizedBox(height: 12),
             Text(
               'Temporarily disable your card for security. You can unfreeze it anytime.',
-              style: TextStyle(
-                fontSize: 16,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: colorScheme.onSurface.withAlpha(180),
               ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),
-            ElevatedButton.icon(
+            FilledButton.icon(
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Card frozen!')),
+                  SnackBar(
+                    content: Text(
+                      'Card frozen!',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: colorScheme.onPrimary,
+                      ),
+                    ),
+                    backgroundColor: colorScheme.primary,
+                  ),
                 );
               },
               icon: const Icon(Icons.lock),
-              label: const Text('Freeze Now'),
-              style: ElevatedButton.styleFrom(
+              label: Text(
+                'Freeze Now',
+                style: Theme.of(
+                  context,
+                ).textTheme.labelLarge?.copyWith(color: colorScheme.onPrimary),
+              ),
+              style: FilledButton.styleFrom(
                 backgroundColor: colorScheme.primary,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                foregroundColor: colorScheme.onPrimary,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32,
+                  vertical: 16,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24),
                 ),

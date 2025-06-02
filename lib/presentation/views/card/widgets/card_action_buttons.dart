@@ -24,20 +24,20 @@ class CardActionButtons extends StatelessWidget {
           onPressed: onFreeze,
           style: ElevatedButton.styleFrom(
             backgroundColor: colorScheme.primary,
-            foregroundColor: Colors.white,
+            foregroundColor: colorScheme.onPrimary,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(100),
             ),
             padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
             elevation: 2,
           ),
-          icon: const Icon(Icons.lock, size: 20),
-          label: const Text(
+          icon: Icon(Icons.lock, size: 20, color: colorScheme.onPrimary),
+          label: Text(
             'Freeze',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
-              color: Colors.white,
+              color: colorScheme.onPrimary,
             ),
           ),
         ),
@@ -45,27 +45,29 @@ class CardActionButtons extends StatelessWidget {
         TextButton.icon(
           onPressed: onDetails,
           icon: Icon(Icons.info_outline, color: colorScheme.primary),
-          label: const Text('Details'),
-          style: TextButton.styleFrom(
-            foregroundColor: colorScheme.primary,
-            textStyle: const TextStyle(
+          label: Text(
+            'Details',
+            style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
+              color: colorScheme.primary,
             ),
           ),
+          style: TextButton.styleFrom(foregroundColor: colorScheme.primary),
         ),
         // Settings
         TextButton.icon(
           onPressed: onSettings,
           icon: Icon(Icons.settings, color: colorScheme.primary),
-          label: const Text('Settings'),
-          style: TextButton.styleFrom(
-            foregroundColor: colorScheme.primary,
-            textStyle: const TextStyle(
+          label: Text(
+            'Settings',
+            style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
+              color: colorScheme.primary,
             ),
           ),
+          style: TextButton.styleFrom(foregroundColor: colorScheme.primary),
         ),
       ],
     );

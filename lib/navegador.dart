@@ -120,6 +120,153 @@ class HomeScreenState extends State<Navegador> {
     );
   }
 
+  Widget _buildProfileMenu(BuildContext context) {
+    return PopupMenuButton<int>(
+      icon: const Icon(Icons.account_circle, size: 32),
+      color: Theme.of(context).colorScheme.surface,
+      offset: const Offset(0, 48), // Aparece justo debajo del botón
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18),
+        side: BorderSide(
+          color: Theme.of(context).colorScheme.outline.withOpacity(0.15),
+        ),
+      ),
+      elevation: 12,
+      padding: EdgeInsets.zero,
+      onSelected: (value) {
+        switch (value) {
+          case 0:
+            // Ver perfil
+            break;
+          case 1:
+            // Editar perfil
+            break;
+          case 2:
+            // Configuración de la cuenta
+            break;
+          case 3:
+            // Preferencias
+            break;
+          case 4:
+            // Cambiar contraseña
+            break;
+          case 5:
+            // Notificaciones
+            break;
+          case 6:
+            // Privacidad
+            break;
+          case 7:
+            // Centro de ayuda / Soporte
+            break;
+          case 8:
+            // Idioma
+            break;
+          case 9:
+            // Cerrar sesión
+            GoRouter.of(context).go('/login');
+            break;
+        }
+      },
+      itemBuilder: (context) => [
+        const PopupMenuItem<int>(
+          value: 0,
+          child: ListTile(
+            leading: Icon(Icons.person, color: Colors.blueGrey),
+            title: Text('Ver perfil'),
+            dense: true,
+            visualDensity: VisualDensity.compact,
+          ),
+        ),
+        const PopupMenuItem<int>(
+          value: 1,
+          child: ListTile(
+            leading: Icon(Icons.edit, color: Colors.blueGrey),
+            title: Text('Editar perfil'),
+            dense: true,
+            visualDensity: VisualDensity.compact,
+          ),
+        ),
+        const PopupMenuItem<int>(
+          value: 2,
+          child: ListTile(
+            leading: Icon(Icons.settings, color: Colors.blueGrey),
+            title: Text('Configuración de la cuenta'),
+            dense: true,
+            visualDensity: VisualDensity.compact,
+          ),
+        ),
+        const PopupMenuItem<int>(
+          value: 3,
+          child: ListTile(
+            leading: Icon(Icons.tune, color: Colors.blueGrey),
+            title: Text('Preferencias'),
+            dense: true,
+            visualDensity: VisualDensity.compact,
+          ),
+        ),
+        const PopupMenuItem<int>(
+          value: 4,
+          child: ListTile(
+            leading: Icon(Icons.lock, color: Colors.blueGrey),
+            title: Text('Cambiar contraseña'),
+            dense: true,
+            visualDensity: VisualDensity.compact,
+          ),
+        ),
+        const PopupMenuItem<int>(
+          value: 5,
+          child: ListTile(
+            leading: Icon(Icons.notifications, color: Colors.blueGrey),
+            title: Text('Notificaciones'),
+            dense: true,
+            visualDensity: VisualDensity.compact,
+          ),
+        ),
+        const PopupMenuItem<int>(
+          value: 6,
+          child: ListTile(
+            leading: Icon(Icons.privacy_tip, color: Colors.blueGrey),
+            title: Text('Privacidad'),
+            dense: true,
+            visualDensity: VisualDensity.compact,
+          ),
+        ),
+        const PopupMenuItem<int>(
+          value: 7,
+          child: ListTile(
+            leading: Icon(Icons.help_center, color: Colors.blueGrey),
+            title: Text('Centro de ayuda / Soporte'),
+            dense: true,
+            visualDensity: VisualDensity.compact,
+          ),
+        ),
+        const PopupMenuItem<int>(
+          value: 8,
+          child: ListTile(
+            leading: Icon(Icons.language, color: Colors.blueGrey),
+            title: Text('Idioma'),
+            dense: true,
+            visualDensity: VisualDensity.compact,
+          ),
+        ),
+        PopupMenuDivider(height: 0),
+        const PopupMenuItem<int>(
+          value: 9,
+          child: ListTile(
+            leading: Icon(Icons.logout, color: Colors.redAccent),
+            title: Text(
+              'Cerrar sesión',
+              style: TextStyle(color: Colors.redAccent),
+            ),
+            dense: true,
+            visualDensity: VisualDensity.compact,
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildDesktopLayout() {
     List<NavigationRailDestination> destinations;
 
@@ -227,14 +374,8 @@ class HomeScreenState extends State<Navegador> {
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Profile IconButton (left)
-                IconButton(
-                  icon: const Icon(Icons.account_circle, size: 32),
-                  color: Theme.of(context).colorScheme.onPrimary,
-                  onPressed: () {
-                    // Acción para perfil
-                  },
-                ),
+                // Profile menu (left)
+                _buildProfileMenu(context),
                 // User greeting (right)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -278,7 +419,7 @@ class HomeScreenState extends State<Navegador> {
                 ),
               ],
             ),
-            actions: [_buildLogoutButton(), _buildThemeButton(isDarkTheme)],
+            actions: [_buildThemeButton(isDarkTheme)],
           ),
           body: LayoutBuilder(
             builder: (context, constraints) {

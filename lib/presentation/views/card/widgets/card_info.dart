@@ -15,7 +15,7 @@ class CardInfo extends StatelessWidget {
       children: [
         Text(
           'Virtual Card',
-          style: TextStyle(
+          style: Theme.of(context).textTheme.labelMedium?.copyWith(
             fontWeight: FontWeight.w100,
             fontSize: 13,
             color: colorScheme.onSurface.withAlpha(128),
@@ -24,7 +24,7 @@ class CardInfo extends StatelessWidget {
         const SizedBox(height: 10),
         Text(
           card.name,
-          style: TextStyle(
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.bold,
             fontSize: 20,
             color: colorScheme.onSurface,
@@ -33,7 +33,7 @@ class CardInfo extends StatelessWidget {
         const SizedBox(height: 10),
         Text(
           card.lastDigits,
-          style: TextStyle(
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.bold,
             fontSize: 16,
             color: colorScheme.onSurface,

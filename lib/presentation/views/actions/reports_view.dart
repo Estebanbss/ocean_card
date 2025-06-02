@@ -8,8 +8,9 @@ class ReportsView extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Reports'),
+        title: Text('Reports', style: TextStyle(color: colorScheme.onPrimary)),
         backgroundColor: colorScheme.primary,
+        iconTheme: IconThemeData(color: colorScheme.onPrimary),
       ),
       body: Align(
         alignment: Alignment.center,
@@ -76,7 +77,7 @@ class ReportsView extends StatelessWidget {
                         icon: Icons.trending_down,
                         title: 'Monthly Spending',
                         subtitle: 'View your monthly expenses breakdown',
-                        color: Colors.redAccent,
+                        color: colorScheme.error, // Monthly Spending
                         onTap: () {},
                       ),
                       const SizedBox(height: 12),
@@ -84,7 +85,7 @@ class ReportsView extends StatelessWidget {
                         icon: Icons.trending_up,
                         title: 'Income Report',
                         subtitle: 'Track your income sources and trends',
-                        color: Colors.green,
+                        color: colorScheme.secondary, // Income Report
                         onTap: () {},
                       ),
                       const SizedBox(height: 12),
@@ -92,7 +93,7 @@ class ReportsView extends StatelessWidget {
                         icon: Icons.category,
                         title: 'Category Analysis',
                         subtitle: 'See spending by categories',
-                        color: Colors.blue,
+                        color: colorScheme.primary, // Category Analysis
                         onTap: () {},
                       ),
                       const SizedBox(height: 12),
@@ -100,7 +101,7 @@ class ReportsView extends StatelessWidget {
                         icon: Icons.savings,
                         title: 'Savings Goals',
                         subtitle: 'Monitor your savings progress',
-                        color: Colors.orange,
+                        color: colorScheme.tertiary, // Savings Goals
                         onTap: () {},
                       ),
                     ],
@@ -123,7 +124,7 @@ class ReportsView extends StatelessWidget {
                     label: const Text('Generate Full Report'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: colorScheme.primary,
-                      foregroundColor: Colors.white,
+                      foregroundColor: colorScheme.onPrimary,
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(24),
@@ -165,8 +166,13 @@ class _ReportCard extends StatelessWidget {
           backgroundColor: color.withValues(alpha: 0.15),
           child: Icon(icon, color: color),
         ),
-        title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-        subtitle: Text(subtitle),
+        title: Text(
+          title,
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(subtitle, style: Theme.of(context).textTheme.bodyMedium),
         trailing: Icon(Icons.arrow_forward_ios, size: 16),
         onTap: onTap,
       ),
