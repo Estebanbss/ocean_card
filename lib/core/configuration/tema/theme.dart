@@ -8,7 +8,7 @@ class MaterialTheme {
   static ColorScheme lightScheme() {
     return const ColorScheme(
       brightness: Brightness.light,
-      primary: Color(0xff000000),
+      primary: Color(0xffffa203),
       surfaceTint: Color(0xff5e5e5e),
       onPrimary: Color(0xffffffff),
       primaryContainer: Color(0xff1b1b1b),
@@ -63,7 +63,7 @@ class MaterialTheme {
   static ColorScheme lightMediumContrastScheme() {
     return const ColorScheme(
       brightness: Brightness.light,
-      primary: Color(0xff000000),
+      primary: Color(0xffffa203),
       surfaceTint: Color(0xff5e5e5e),
       onPrimary: Color(0xffffffff),
       primaryContainer: Color(0xff1b1b1b),
@@ -118,7 +118,7 @@ class MaterialTheme {
   static ColorScheme lightHighContrastScheme() {
     return const ColorScheme(
       brightness: Brightness.light,
-      primary: Color(0xff000000),
+      primary: Color(0xffffa203),
       surfaceTint: Color(0xff5e5e5e),
       onPrimary: Color(0xffffffff),
       primaryContainer: Color(0xff1b1b1b),
@@ -173,7 +173,7 @@ class MaterialTheme {
   static ColorScheme darkScheme() {
     return const ColorScheme(
       brightness: Brightness.dark,
-      primary: Color(0xffc6c6c6),
+      primary: Color(0xffffa203),
       surfaceTint: Color(0xffc6c6c6),
       onPrimary: Color(0xff303030),
       primaryContainer: Color(0xff000000),
@@ -228,7 +228,7 @@ class MaterialTheme {
   static ColorScheme darkMediumContrastScheme() {
     return const ColorScheme(
       brightness: Brightness.dark,
-      primary: Color(0xffdcdcdc),
+      primary: Color(0xffffa203),
       surfaceTint: Color(0xffc6c6c6),
       onPrimary: Color(0xff262626),
       primaryContainer: Color(0xff919191),
@@ -283,7 +283,7 @@ class MaterialTheme {
   static ColorScheme darkHighContrastScheme() {
     return const ColorScheme(
       brightness: Brightness.dark,
-      primary: Color(0xfff0f0f0),
+      primary: Color(0xffffa203),
       surfaceTint: Color(0xffc6c6c6),
       onPrimary: Color(0xff000000),
       primaryContainer: Color(0xffc2c2c2),
@@ -335,22 +335,19 @@ class MaterialTheme {
     return theme(darkHighContrastScheme());
   }
 
-
   ThemeData theme(ColorScheme colorScheme) => ThemeData(
-     useMaterial3: true,
-     brightness: colorScheme.brightness,
-     colorScheme: colorScheme,
-     textTheme: textTheme.apply(
-       bodyColor: colorScheme.onSurface,
-       displayColor: colorScheme.onSurface,
-     ),
-     scaffoldBackgroundColor: colorScheme.surface,
-     canvasColor: colorScheme.surface,
+    useMaterial3: true,
+    brightness: colorScheme.brightness,
+    colorScheme: colorScheme,
+    textTheme: textTheme.apply(
+      bodyColor: colorScheme.onSurface,
+      displayColor: colorScheme.onSurface,
+    ),
+    scaffoldBackgroundColor: colorScheme.surface,
+    canvasColor: colorScheme.surface,
   );
 
-
-  List<ExtendedColor> get extendedColors => [
-  ];
+  List<ExtendedColor> get extendedColors => [];
 }
 
 class ExtendedColor {

@@ -7,8 +7,6 @@
 // import '../../core/log_locat.dart';
 // import '../models/usuario_model.dart';
 
-
-
 // /// Inicialización de Firebase Admin utilizando las credenciales del servicio.
 // final admin = FirebaseAdminApp.initializeApp(
 //   'ocean_card',

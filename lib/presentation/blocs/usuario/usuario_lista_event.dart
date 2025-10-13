@@ -7,7 +7,6 @@
 //   List<Object?> get props => [];
 // }
 
-
 // class CargandoUsuariosPorRol extends UsuarioListaEvent {
 //   final Roles rol;
 

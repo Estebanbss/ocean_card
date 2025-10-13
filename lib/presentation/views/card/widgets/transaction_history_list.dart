@@ -26,7 +26,7 @@ class TransactionHistoryList extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: history.length,
-          separatorBuilder: (_, __) => const Divider(height: 1, thickness: 0.5),
+          separatorBuilder: (_, _) => const Divider(height: 1, thickness: 0.5),
           itemBuilder: (context, idx) {
             final m = history[idx];
             final isNegative = m.amount.startsWith('-');

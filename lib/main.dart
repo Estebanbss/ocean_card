@@ -55,7 +55,8 @@ class _MainAppState extends State<MainApp> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    TextTheme textTheme = createTextTheme(context, "Barlow", "Barlow");
+    // Use Barlow for both body and display to avoid rounded Poppins look
+    TextTheme textTheme = createTextTheme(context, "Barlow", "Oswald");
 
     MaterialTheme theme = MaterialTheme(textTheme);
 

@@ -6,7 +6,6 @@
 // import '../../../data/models/usuario_model.dart';
 // import '../../../domain/usecases/usuario/obtener_usuarios_usecase.dart';
 
-
 // part 'usuario_lista_event.dart';
 // part 'usuario_lista_state.dart';
 

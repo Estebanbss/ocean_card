@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ocean_card/presentation/views/login/dialogs/forgot_password_dialog.dart';
 
-
 class Login extends StatefulWidget {
   final VoidCallback onNext;
   const Login({super.key, required this.onNext});

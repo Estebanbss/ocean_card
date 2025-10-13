@@ -8,7 +8,6 @@
 // import '../../../domain/usecases/usuario/eliminar_usuario_usecase.dart';
 // import '../../../domain/usecases/usuario/registrar_usuario_usecase.dart';
 
-
 // part 'usuario_operaciones_event.dart';
 // part 'usuario_operaciones_state.dart';
 
