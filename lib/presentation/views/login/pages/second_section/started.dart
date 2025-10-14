@@ -26,7 +26,7 @@ class Started extends StatelessWidget {
                   StepsIndicator(totalSteps: 5, stepNow: 0),
                   const SizedBox(height: 24),
                   Text(
-                    'Getting Started',
+                    'Comenzando',
                     style: TextStyle(
                       fontWeight: FontWeight.w900,
                       fontSize: 32,
@@ -41,7 +41,7 @@ class Started extends StatelessWidget {
               IntlPhoneField(
                 controller: countryController,
                 decoration: InputDecoration(
-                  labelText: 'Country Code',
+                  labelText: 'Código de país',
                   border: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(12)),
                   ),
@@ -50,7 +50,7 @@ class Started extends StatelessWidget {
               ),
               const SizedBox(height: 32),
 
-              // Botón y texto de "Already have an account? Sign in"
+              // Botón y texto de "¿Ya tienes una cuenta? Iniciar sesión"
               Column(
                 children: [
                   ElevatedButton(
@@ -65,7 +65,7 @@ class Started extends StatelessWidget {
                       ),
                     ),
                     child: const Text(
-                      'Continue',
+                      'Continuar',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -82,14 +82,14 @@ class Started extends StatelessWidget {
                         text: TextSpan(
                           children: [
                             TextSpan(
-                              text: 'Already have an account? ',
+                              text: '¿Ya tienes una cuenta? ',
                               style: TextStyle(
                                 color: colorScheme.onSurface,
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
                             TextSpan(
-                              text: 'Sign in',
+                              text: 'Iniciar sesión',
                               style: TextStyle(
                                 color: colorScheme.primary,
                                 fontWeight: FontWeight.bold,

@@ -59,7 +59,7 @@ class _CreatePinState extends State<CreatePin> {
                   Column(
                     children: [
                       Text(
-                        'Create your PIN',
+                        'Crea tu PIN',
                         style: TextStyle(
                           fontWeight: FontWeight.w900,
                           fontSize: 32,
@@ -68,7 +68,7 @@ class _CreatePinState extends State<CreatePin> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        "Create  a  four-digit passcode to secure your account",
+                        "Crea un código de cuatro dígitos para asegurar tu cuenta",
                         style: TextStyle(
                           fontWeight: FontWeight.w100,
                           fontSize: 16,
@@ -128,7 +128,7 @@ class _CreatePinState extends State<CreatePin> {
                     ),
                   ),
                   child: const Text(
-                    'Set up PIN',
+                    'Configurar PIN',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

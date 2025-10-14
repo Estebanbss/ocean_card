@@ -60,7 +60,7 @@ class _FourDigitCodeState extends State<FourDigitCode> {
                   Column(
                     children: [
                       Text(
-                        'Enter 4-digit code',
+                        'Introduce el código de 4 dígitos',
                         style: TextStyle(
                           fontWeight: FontWeight.w900,
                           fontSize: 32,
@@ -69,7 +69,7 @@ class _FourDigitCodeState extends State<FourDigitCode> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        "We've send the code to ***1234",
+                        "Hemos enviado el código a ***1234",
                         style: TextStyle(
                           fontWeight: FontWeight.w100,
                           fontSize: 16,
@@ -114,7 +114,7 @@ class _FourDigitCodeState extends State<FourDigitCode> {
               ),
               const SizedBox(height: 32),
 
-              // Botón y texto de "Already have an account? Sign in"
+                  // Botón y texto de "¿Ya tienes una cuenta? Iniciar sesión"
               Column(
                 children: [
                   ElevatedButton(
@@ -129,7 +129,7 @@ class _FourDigitCodeState extends State<FourDigitCode> {
                       ),
                     ),
                     child: const Text(
-                      'Get started',
+                      'Comenzar',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -146,14 +146,14 @@ class _FourDigitCodeState extends State<FourDigitCode> {
                         text: TextSpan(
                           children: [
                             TextSpan(
-                              text: 'Already have an account? ',
+                              text: '¿Ya tienes una cuenta? ',
                               style: TextStyle(
                                 color: colorScheme.onSurface,
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
                             TextSpan(
-                              text: 'Sign in',
+                              text: 'Iniciar sesión',
                               style: TextStyle(
                                 color: colorScheme.primary,
                                 fontWeight: FontWeight.bold,
