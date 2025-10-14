@@ -101,7 +101,7 @@ class _LoginViewState extends State<LoginView> {
                                       ),
                                     ),
                                     child: const Text(
-                                      'Get Started',
+                                      'Abrir cuenta',
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
@@ -129,7 +129,7 @@ class _LoginViewState extends State<LoginView> {
                                       backgroundColor: Colors.transparent,
                                     ),
                                     child: Text(
-                                      'Sign in',
+                                      'Entrar',
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,

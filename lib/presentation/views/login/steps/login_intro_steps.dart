@@ -55,6 +55,19 @@ class _LoginIntroStepsState extends State<LoginIntroSteps> {
                   ),
                 ],
               ),
+              // Step 3: tarjeta amarilla + título y descripción
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  StepItem(
+                    title: 'OBTÉN UNA TARJETA 💳',
+                    subtitle:
+                        'Tarjeta Visa aceptada en más de 120 millones de comercios en el mundo en dólares.',
+                  ),
+                  SizedBox(height: 16),
+                  _Step3Card(),
+                ],
+              ),
 
               // Step 2: título en bold + imagen
               Column(
@@ -67,20 +80,6 @@ class _LoginIntroStepsState extends State<LoginIntroSteps> {
                   ),
                   SizedBox(height: 16),
                   _Step2Image(),
-                ],
-              ),
-
-              // Step 3: tarjeta amarilla + título y descripción
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  StepItem(
-                    title: 'OBTÉN UNA TARJETA 💳',
-                    subtitle:
-                        'Tarjeta Visa aceptada en más de 120 millones de comercios en el mundo en dólares.',
-                  ),
-                  SizedBox(height: 16),
-                  _Step3Card(),
                 ],
               ),
 
@@ -136,7 +135,7 @@ class _Step3Card extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset('assets/card_yellow.svg', height: 220);
+    return SvgPicture.asset('assets/card_black.svg', height: 220);
   }
 }
 
