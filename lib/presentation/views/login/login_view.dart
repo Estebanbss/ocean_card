@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ocean_card/core/configuration/tema/tema_cubit.dart';
 
-import 'pages/second_section/four_digit_code.dart';
 import 'pages/second_section/personal_information.dart';
-import 'pages/second_section/home_adress.dart';
 import 'pages/second_section/create_pin.dart';
+// 'started.dart' removed from flow
 import 'pages/first_section/login.dart';
 import 'pages/first_section/login_pin.dart';
 import 'steps/steps_indicator.dart';
@@ -39,15 +38,8 @@ class _LoginViewState extends State<LoginView> {
   void initState() {
     super.initState();
     context.read<TemaCubit>().lightTheme();
-    _pageController.addListener(() {
-      final page = _pageController.page ?? 0.0;
-      final round = page.round().clamp(0, 2);
-      if (_currentStep != round) {
-        setState(() {
-          _currentStep = round;
-        });
-      }
-    });
+    // Page changes are handled via PageView.onPageChanged to avoid
+    // relying on the controller's page value during init.
   }
 
   @override
@@ -63,6 +55,8 @@ class _LoginViewState extends State<LoginView> {
                 PageView(
                   controller: _pageController,
                   physics: const NeverScrollableScrollPhysics(),
+                  onPageChanged: (index) =>
+                      setState(() => _currentStep = index),
                   children: [
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 64, 20, 20),
@@ -111,7 +105,7 @@ class _LoginViewState extends State<LoginView> {
                                   ),
                                   const SizedBox(height: 8),
                                   OutlinedButton(
-                                    onPressed: () => _goToPage(6),
+                                    onPressed: () => _goToPage(2),
                                     style: OutlinedButton.styleFrom(
                                       side: BorderSide(
                                         color: colorScheme.primary,
@@ -144,37 +138,44 @@ class _LoginViewState extends State<LoginView> {
                         ),
                       ),
                     ),
-                    // Página 2: FourDigitCode
-                    FourDigitCode(
-                      onNext: () => _goToPage(3),
-                      onSignIn: () => _goToPage(6),
+                    // Página 1: PersonalInformation (registration start after intro)
+                    PersonalInformation(
+                      onNext: (data) {
+                        // data collected, proceed to create PIN (page index 2)
+                        _goToPage(2);
+                      },
                     ),
-                    // Página 3: PersonalInformation
-                    PersonalInformation(onNext: () => _goToPage(4)),
-                    // Página 4: HomeAdress
-                    HomeAdress(onNext: () => _goToPage(5)),
-                    // Página 5: CreatePin
-                    const CreatePin(),
-                    // Página 6: Login
-                    Login(onNext: () => _goToPage(7)),
-                    // Página 7: LoginPin
+
+                    // Página 2: CreatePin - user enters desired 4-digit PIN
+                    CreatePin(
+                      onPinEntered: (pin) {
+                        // when PIN entered and confirmed locally in CreatePin,
+                        // go directly to the Login page (next page index after removal)
+                        _goToPage(3);
+                      },
+                    ),
+
+                    // Página 3: Login
+                    Login(onNext: () => _goToPage(4)),
+                    // Página 5: LoginPin
                     const LoginPin(),
                   ],
                 ),
 
-                // Fixed thin ticks at top
-                Positioned(
-                  top: 8,
-                  left: 0,
-                  right: 0,
-                  child: Center(
-                    child: StepsIndicator(
-                      currentIndex: _introStep,
-                      primaryColor: colorScheme.primary,
-                      onSurface: colorScheme.onSurface,
+                // Fixed thin ticks at top. Only show during the intro (page 0)
+                if (_currentStep == 0)
+                  Positioned(
+                    top: 8,
+                    left: 0,
+                    right: 0,
+                    child: Center(
+                      child: StepsIndicator(
+                        currentIndex: _introStep,
+                        primaryColor: colorScheme.primary,
+                        onSurface: colorScheme.onSurface,
+                      ),
                     ),
                   ),
-                ),
               ],
             ),
           ),

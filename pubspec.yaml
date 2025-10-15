@@ -23,6 +23,7 @@ dependencies:
      shared_preferences: ^2.5.3
      flutter_svg: ^2.1.0
      intl_phone_field: ^3.2.0
+     country_pickers: ^3.0.1
 
 dev_dependencies:
      flutter_test:

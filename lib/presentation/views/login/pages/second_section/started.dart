@@ -1,16 +1,29 @@
+// Started: phone input screen
 import 'package:flutter/material.dart';
-import 'package:ocean_card/presentation/widgets/steps.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
-class Started extends StatelessWidget {
-  final VoidCallback onNext;
+class Started extends StatefulWidget {
+  final ValueChanged<String> onNext;
   final VoidCallback? onSignIn;
   const Started({super.key, required this.onNext, this.onSignIn});
 
   @override
+  State<Started> createState() => _StartedState();
+}
+
+class _StartedState extends State<Started> {
+  final TextEditingController _phoneController = TextEditingController();
+  String _fullNumber = '';
+
+  @override
+  void dispose() {
+    _phoneController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final TextEditingController countryController = TextEditingController();
 
     return Center(
       child: ConstrainedBox(
@@ -20,87 +33,79 @@ class Started extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Steps arriba y título abajo, unidos por Column
+              // Steps arriba y título
               Column(
                 children: [
-                  StepsIndicator(totalSteps: 5, stepNow: 0),
-                  const SizedBox(height: 24),
+                  // If you want a graphical steps indicator here, pass values from the parent
                   Text(
-                    'Comenzando',
+                    'Paso 2 de 3',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                      color: colorScheme.onSurface,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Número de teléfono',
                     style: TextStyle(
                       fontWeight: FontWeight.w900,
-                      fontSize: 32,
+                      fontSize: 28,
                       color: colorScheme.onSurface,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 24),
 
-              // Selector de número de países (input)
               IntlPhoneField(
-                controller: countryController,
-                decoration: InputDecoration(
-                  labelText: 'Código de país',
-                  border: const OutlineInputBorder(
+                controller: _phoneController,
+                decoration: const InputDecoration(
+                  labelText: 'Número de teléfono',
+                  border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(12)),
                   ),
                 ),
-                keyboardType: TextInputType.phone,
+                initialCountryCode: 'US',
+                onChanged: (phone) {
+                  _fullNumber = phone.completeNumber;
+                },
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 24),
 
-              // Botón y texto de "¿Ya tienes una cuenta? Iniciar sesión"
-              Column(
-                children: [
-                  ElevatedButton(
-                    onPressed: onNext,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: colorScheme.primary,
-                      foregroundColor: Colors.white,
-                      minimumSize: const Size(double.infinity, 50),
-                      elevation: 2,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(100)),
-                      ),
-                    ),
-                    child: const Text(
-                      'Continuar',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: _fullNumber.isNotEmpty
+                      ? () => widget.onNext(_fullNumber)
+                      : null,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: colorScheme.primary,
+                    foregroundColor: Colors.white,
+                    minimumSize: const Size(double.infinity, 50),
+                    elevation: 2,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(100)),
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  MouseRegion(
-                    cursor: SystemMouseCursors.click,
-                    child: GestureDetector(
-                      onTap: onSignIn,
-                      child: RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: '¿Ya tienes una cuenta? ',
-                              style: TextStyle(
-                                color: colorScheme.onSurface,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                            TextSpan(
-                              text: 'Iniciar sesión',
-                              style: TextStyle(
-                                color: colorScheme.primary,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                  child: const Text(
+                    'Continuar',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
-                ],
+                ),
+              ),
+
+              const SizedBox(height: 12),
+              TextButton(
+                onPressed: widget.onSignIn,
+                child: Text(
+                  '¿Ya tienes una cuenta? Iniciar sesión',
+                  style: TextStyle(color: colorScheme.primary),
+                ),
               ),
             ],
           ),
