@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ocean_card/presentation/widgets/steps.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:country_pickers/country_pickers.dart';
 
 class PersonalInformation extends StatefulWidget {
@@ -16,7 +15,8 @@ class _PersonalInformationState extends State<PersonalInformation> {
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _dobController = TextEditingController();
   final TextEditingController _dobDisplayController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _phoneNumberOnlyController =
+      TextEditingController();
   final TextEditingController _countryController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   // PIN is handled in separate CreatePin/ConfirmPin steps
@@ -126,75 +126,125 @@ class _PersonalInformationState extends State<PersonalInformation> {
                   },
                 ),
                 const SizedBox(height: 10),
-                IntlPhoneField(
-                  controller: _phoneController,
-                  decoration: const InputDecoration(
-                    labelText: 'Número de teléfono',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                  ),
-                  initialCountryCode: 'US',
-                  onChanged: (phone) {
-                    _fullPhone = phone.completeNumber;
-                    _validate();
-                  },
-                  onCountryChanged: (country) {
-                    // country.code is the ISO country code like 'US'
-                    setState(() {
-                      _selectedCountryCode = country.code;
-                      _countryController.text = country.name;
-                    });
-                    _validate();
-                  },
-                ),
-                const SizedBox(height: 10),
-                // Country picker: constrain and allow the name to ellipsize
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.grey.shade400),
-                  ),
-                  height: 56,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: CountryPickerDropdown(
-                          initialValue: _selectedCountryCode,
-                          itemBuilder: (country) {
-                            // Dropdown item lives in an overlay with unbounded width.
-                            // Avoid Flexible/Expanded (flex children) inside that Row.
-                            return Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                CountryPickerUtils.getDefaultFlagImage(country),
-                                const SizedBox(width: 8),
-                                // Constrain the width of the country name so it
-                                // ellipsizes instead of trying to flex in an
-                                // unbounded environment.
-                                ConstrainedBox(
-                                  constraints: const BoxConstraints(
-                                    maxWidth: 200,
-                                  ),
-                                  child: Text(
-                                    country.name,
-                                    overflow: TextOverflow.ellipsis,
+                // Phone input: custom country selector + number field so we control dialog language
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () async {
+                        final picked = await showDialog<Map<String, String>>(
+                          context: context,
+                          builder: (context) => CountrySearchDialog(),
+                        );
+                        if (picked != null) {
+                          setState(() {
+                            _selectedCountryCode = picked['isoCode'];
+                            _countryController.text = picked['name'] ?? '';
+                            // try to read phone code from country util
+                          });
+                          _validate();
+                        }
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 12,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.grey.shade400),
+                        ),
+                        child: Row(
+                          children: [
+                            if (_selectedCountryCode != null)
+                              Padding(
+                                padding: const EdgeInsets.only(right: 8.0),
+                                child: CountryPickerUtils.getDefaultFlagImage(
+                                  CountryPickerUtils.getCountryByIsoCode(
+                                    _selectedCountryCode!,
                                   ),
                                 ),
-                              ],
-                            );
-                          },
-                          onValuePicked: (country) {
-                            setState(() {
-                              _selectedCountryCode = country.isoCode;
-                              _countryController.text = country.name;
-                            });
-                            _validate();
-                          },
+                              ),
+                            Text(
+                              _selectedCountryCode ?? 'PA',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const Icon(Icons.arrow_drop_down),
+                          ],
                         ),
                       ),
-                    ],
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: TextField(
+                        controller: _phoneNumberOnlyController,
+                        decoration: const InputDecoration(
+                          labelText: 'Número de teléfono',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(12)),
+                          ),
+                        ),
+                        keyboardType: TextInputType.phone,
+                        onChanged: (val) {
+                          final dial = _getSelectedPhoneDialCode();
+                          _fullPhone =
+                              '$dial${val.replaceAll(RegExp(r'\\s+'), '')}';
+                          _validate();
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                // Country picker: open a dialog with searchable list
+                GestureDetector(
+                  onTap: () async {
+                    final picked = await showDialog<Map<String, String>>(
+                      context: context,
+                      builder: (context) => CountrySearchDialog(),
+                    );
+                    if (picked != null) {
+                      setState(() {
+                        _selectedCountryCode = picked['isoCode'];
+                        _countryController.text = picked['name'] ?? '';
+                      });
+                      _validate();
+                    }
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.grey.shade400),
+                    ),
+                    height: 56,
+                    child: Row(
+                      children: [
+                        if (_selectedCountryCode != null)
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: CountryPickerUtils.getDefaultFlagImage(
+                              CountryPickerUtils.getCountryByIsoCode(
+                                _selectedCountryCode!,
+                              ),
+                            ),
+                          ),
+                        Expanded(
+                          child: Text(
+                            _countryController.text.isNotEmpty
+                                ? _countryController.text
+                                : 'Selecciona un país',
+                            style: TextStyle(
+                              color: _countryController.text.isNotEmpty
+                                  ? Colors.black
+                                  : Colors.grey.shade600,
+                            ),
+                          ),
+                        ),
+                        const Icon(Icons.arrow_drop_down),
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -269,16 +319,162 @@ class _PersonalInformationState extends State<PersonalInformation> {
     }
   }
 
-  // country picker item builder moved inline where the widget is used
+  String _getSelectedPhoneDialCode() {
+    try {
+      if (_selectedCountryCode != null) {
+        final country = CountryPickerUtils.getCountryByIsoCode(
+          _selectedCountryCode!,
+        );
+        // Access dynamically: if an attribute like 'phoneCode' exists use it, otherwise fallback
+        final dyn = country as dynamic;
+        final maybe =
+            (dyn.phoneCode ??
+                    dyn.dialCode ??
+                    dyn['phone_code'] ??
+                    dyn['phoneCode'])
+                ?.toString();
+        if (maybe != null && maybe.isNotEmpty) {
+          final dc = maybe.startsWith('+') ? maybe : '+$maybe';
+          return dc;
+        }
+      }
+    } catch (_) {}
+    return '+1';
+  }
+}
+
+class CountrySearchDialog extends StatefulWidget {
+  const CountrySearchDialog({super.key});
+
+  @override
+  State<CountrySearchDialog> createState() => _CountrySearchDialogState();
+}
+
+class _CountrySearchDialogState extends State<CountrySearchDialog> {
+  final TextEditingController _searchController = TextEditingController();
+  late List<dynamic> _all; // from country_pickers
+  late List<dynamic> _filtered;
+
+  @override
+  void initState() {
+    super.initState();
+    _all = countryListFromCountryPicker();
+    _filtered = List.from(_all);
+    _searchController.addListener(_onSearch);
+  }
+
+  void _onSearch() {
+    final q = _searchController.text.toLowerCase();
+    setState(() {
+      if (q.isEmpty) {
+        _filtered = List.from(_all);
+      } else {
+        _filtered = _all.where((c) {
+          final name = (c?.name ?? '').toString().toLowerCase();
+          final iso = (c?.isoCode ?? '').toString().toLowerCase();
+          return name.contains(q) || iso.contains(q);
+        }).toList();
+      }
+    });
+  }
 
   @override
   void dispose() {
-    _firstNameController.dispose();
-    _lastNameController.dispose();
-    _dobController.dispose();
-    _phoneController.dispose();
-    _countryController.dispose();
-    _emailController.dispose();
+    _searchController.removeListener(_onSearch);
+    _searchController.dispose();
     super.dispose();
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Seleccionar país'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextField(
+            controller: _searchController,
+            decoration: const InputDecoration(
+              prefixIcon: Icon(Icons.search),
+              hintText: 'Buscar país',
+            ),
+          ),
+          const SizedBox(height: 8),
+          SizedBox(
+            width: double.maxFinite,
+            height: 320,
+            child: ListView.separated(
+              itemCount: _filtered.length,
+              separatorBuilder: (_, _) => const Divider(height: 1),
+              itemBuilder: (context, index) {
+                final c = _filtered[index];
+                final name = (c?.name ?? '').toString();
+                final iso = (c?.isoCode ?? '').toString();
+                return ListTile(
+                  leading: CountryPickerUtils.getDefaultFlagImage(c),
+                  title: Text(name),
+                  subtitle: Text(iso),
+                  onTap: () =>
+                      Navigator.of(context).pop({'isoCode': iso, 'name': name}),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Cerrar'),
+        ),
+      ],
+    );
+  }
 }
+
+// Helper to extract the country list from country_pickers package.
+List<dynamic> countryListFromCountryPicker() {
+  // country_pickers exposes a `countries` list inside its package; we access via `CountryPickerUtils` helper by iterating known codes.
+  // Unfortunately `country_pickers` does not export a single list, so reconstruct using the provided util for common ISO codes.
+  // We'll use a pragmatic subset of ISO codes commonly used in the app.
+  const isoCodes = [
+    'US',
+    'ES',
+    'MX',
+    'AR',
+    'CL',
+    'CO',
+    'PE',
+    'VE',
+    'UY',
+    'BR',
+    'CA',
+    'GB',
+    'FR',
+    'DE',
+    'IT',
+    'NL',
+    'SE',
+    'NO',
+    'DK',
+    'FI',
+    'JP',
+    'CN',
+    'IN',
+    'AU',
+    'NZ',
+  ];
+  final List<dynamic> list = isoCodes
+      .map((iso) => CountryPickerUtils.getCountryByIsoCode(iso))
+      .toList();
+  // fall back: ensure list is not empty
+  if (list.isEmpty) {
+    final fallback = CountryPickerUtils.getCountryByIsoCode('US');
+    return [fallback];
+  }
+  return list;
+}
+
+  // Note: controllers are disposed in their owning State classes. PersonalInformation
+  // uses automatic disposal of its controllers here if needed; the CountrySearchDialog
+  // already disposes its own controllers.

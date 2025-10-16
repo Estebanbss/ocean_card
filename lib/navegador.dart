@@ -70,17 +70,6 @@ class HomeScreenState extends State<Navegador> {
     }
   }
 
-  String _getGreeting() {
-    final hour = DateTime.now().hour;
-    if (hour < 12) {
-      return "Good morning,";
-    } else if (hour < 18) {
-      return "Good afternoon,";
-    } else {
-      return "Good evening,";
-    }
-  }
-
   Widget _buildThemeButton(bool isDark) {
     return MouseRegion(
       onEnter: (_) => setState(() => hoverTheme = true),
@@ -120,13 +109,44 @@ class HomeScreenState extends State<Navegador> {
   //   );
   // }
 
-  Widget _buildProfileMenu(BuildContext context) {
+  Widget _buildProfileMenu(BuildContext context, String? username) {
     return PopupMenuButton<int>(
-      icon: Icon(
-        Icons.account_circle,
-        size: 32,
-        color: Theme.of(context).colorScheme.onPrimary,
+      icon: Row(
+        children: [
+          Icon(
+            Icons.account_circle,
+            size: 32,
+            color: Theme.of(context).colorScheme.onPrimary,
+          ),
+          const SizedBox(width: 8),
+          Stack(
+            children: [
+              // Trazo (stroke) para engrosar el contorno
+              Text(
+                username ?? 'Usuario',
+                style: TextStyle(
+                  foreground: Paint()
+                    ..style = PaintingStyle.stroke
+                    ..strokeWidth = 0.9
+                    ..color = Theme.of(context).colorScheme.onPrimary,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 16,
+                ),
+              ),
+              // Relleno encima
+              Text(
+                username ?? 'Usuario',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
+
       color: Theme.of(context).colorScheme.onPrimary,
       offset: const Offset(0, 48), // Aparece justo debajo del botón
       shape: RoundedRectangleBorder(
@@ -378,48 +398,7 @@ class HomeScreenState extends State<Navegador> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // Profile menu (left)
-                  _buildProfileMenu(context),
-                  // User greeting (right)
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        _getGreeting(),
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Theme.of(
-                            context,
-                          ).colorScheme.onPrimary.withValues(alpha: 0.7),
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            "Codes korede ",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Theme.of(context).colorScheme.onPrimary,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const Icon(
-                            Icons.waving_hand,
-                            color: Colors.amber,
-                            size: 22,
-                            shadows: [
-                              Shadow(
-                                color: Color.fromARGB(255, 89, 29, 10),
-                                offset: Offset(0, 0),
-                                blurRadius: 4,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                  _buildProfileMenu(context, null),
                 ],
               ),
             ),

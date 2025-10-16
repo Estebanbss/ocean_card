@@ -105,7 +105,7 @@ class _LoginViewState extends State<LoginView> {
                                   ),
                                   const SizedBox(height: 8),
                                   OutlinedButton(
-                                    onPressed: () => _goToPage(2),
+                                    onPressed: () => _goToPage(3),
                                     style: OutlinedButton.styleFrom(
                                       side: BorderSide(
                                         color: colorScheme.primary,

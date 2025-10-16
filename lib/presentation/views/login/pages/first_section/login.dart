@@ -101,7 +101,7 @@ class _LoginState extends State<Login> {
                       );
                     },
                     child: Text(
-                      'Forgot password?',
+                      '¿Olvidaste tu contraseña?',
                       style: TextStyle(
                         color: colorScheme.onSurface,
                         fontWeight: FontWeight.w400,

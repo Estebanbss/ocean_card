@@ -19,44 +19,29 @@ class QuickActionsContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-      decoration: BoxDecoration(
-        color: colorScheme.primaryContainer,
-        borderRadius: BorderRadius.circular(24),
-      ),
-      child: SingleChildScrollView(
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            QuickActionButton(
-              icon: Icons.download,
-              label: 'Deposit',
-              color: colorScheme.onPrimary,
-              onTap: onDepositTap,
-            ),
-            QuickActionButton(
-              icon: Icons.swap_horiz,
-              label: 'Exchange',
-              color: colorScheme.onPrimary,
-              onTap: onExchangeTap,
-            ),
-            QuickActionButton(
-              icon: Icons.upload,
-              label: 'Withdraw',
-              color: colorScheme.onPrimary,
-              onTap: onWithdrawTap,
-            ),
-            QuickActionButton(
-              icon: Icons.credit_card,
-              label: 'Your CVU',
-              color: colorScheme.onPrimary,
-              onTap: onCvuTap,
-            ),
-          ],
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Expanded(
+          child: QuickActionButton(
+            icon: Icons.download,
+            label: 'Depositar',
+            color: colorScheme.onPrimary,
+            onTap: onDepositTap,
+          ),
         ),
-      ),
+
+        const SizedBox(width: 10),
+
+        Expanded(
+          child: QuickActionButton(
+            icon: Icons.upload,
+            label: 'Retirar',
+            color: colorScheme.onPrimary,
+            onTap: onWithdrawTap,
+          ),
+        ),
+      ],
     );
   }
 }
