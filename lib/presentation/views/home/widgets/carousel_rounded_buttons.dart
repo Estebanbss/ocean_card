@@ -17,10 +17,10 @@ class CarouselRoundedButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Estimate label height: fontSize 12 with height 1.4 and 2 max lines
-    const double _labelFontSize = 12.0;
-    const double _labelLineHeight = 1.4;
-    const int _labelMaxLines = 2;
-    final double labelHeight = _labelFontSize * _labelLineHeight * _labelMaxLines;
+  const double labelFontSize = 12.0;
+  const double labelLineHeight = 1.4;
+  const int labelMaxLines = 2;
+  final double labelHeight = labelFontSize * labelLineHeight * labelMaxLines;
     final double totalHeight = circleSize + 8 + labelHeight; // circle + spacing + label
 
     return SizedBox(
