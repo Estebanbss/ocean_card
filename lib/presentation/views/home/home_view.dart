@@ -84,6 +84,7 @@ class _HomeViewState extends State<HomeView> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 24),
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Balance card with currency selection
@@ -141,7 +142,11 @@ class _HomeViewState extends State<HomeView> {
                                 icon: Icons.send,
                                 label: 'Enviar dinero',
                                 onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(builder: (_) => const AddFundsView()));
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (_) => const AddFundsView(),
+                                    ),
+                                  );
                                 },
                               ),
                               CarouselRoundedButtonItem(

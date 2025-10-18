@@ -17,6 +17,7 @@ class CarouselRoundedButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      width: double.infinity,
       height: circleSize + 36, // icon circle + label + padding
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
@@ -32,11 +33,19 @@ class CarouselRoundedButtons extends StatelessWidget {
                   width: circleSize,
                   height: circleSize,
                   decoration: BoxDecoration(
-                    color: item.backgroundColor ?? Theme.of(context).colorScheme.primaryContainer,
+                    color:
+                        item.backgroundColor ??
+                        Theme.of(context).colorScheme.primaryContainer,
                     shape: BoxShape.circle,
                   ),
                   child: Center(
-                    child: Icon(item.icon, size: iconSize, color: item.iconColor ?? Theme.of(context).colorScheme.onPrimaryContainer),
+                    child: Icon(
+                      item.icon,
+                      size: iconSize,
+                      color:
+                          item.iconColor ??
+                          Theme.of(context).colorScheme.onPrimaryContainer,
+                    ),
                   ),
                 ),
               ),
@@ -46,7 +55,10 @@ class CarouselRoundedButtons extends StatelessWidget {
                 child: Text(
                   item.label,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -54,7 +66,7 @@ class CarouselRoundedButtons extends StatelessWidget {
             ],
           );
         },
-  separatorBuilder: (context, index) => SizedBox(width: spacing),
+        separatorBuilder: (context, index) => SizedBox(width: spacing),
         itemCount: items.length,
       ),
     );
