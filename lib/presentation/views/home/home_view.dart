@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ocean_card/presentation/views/actions/actions.dart';
 import 'package:ocean_card/presentation/views/home/widgets/last_transactions.dart';
+import 'package:ocean_card/presentation/views/home/widgets/carousel_rounded_buttons.dart';
 import 'widgets/balance_card.dart';
 
 class HomeView extends StatefulWidget {
@@ -116,18 +117,54 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     const SizedBox(height: 12),
 
-                    // Statistics cards
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24),
                       child: Column(
                         children: [
+                          CarouselRoundedButtons(
+                            items: [
+                              CarouselRoundedButtonItem(
+                                icon: Icons.credit_card,
+                                label: 'Tarjetas',
+                                onTap: () {
+                                  // TODO: navegar a la vista de tarjeta
+                                },
+                              ),
+                              CarouselRoundedButtonItem(
+                                icon: Icons.link,
+                                label: 'Cobrar por link',
+                                onTap: () {
+                                  // TODO: implementar cobrar por link
+                                },
+                              ),
+                              CarouselRoundedButtonItem(
+                                icon: Icons.send,
+                                label: 'Enviar dinero',
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (_) => const AddFundsView()));
+                                },
+                              ),
+                              CarouselRoundedButtonItem(
+                                icon: Icons.account_balance_wallet,
+                                label: 'Web3 Wallet',
+                                onTap: () {
+                                  // TODO: abrir wallet
+                                },
+                              ),
+                              CarouselRoundedButtonItem(
+                                icon: Icons.schedule,
+                                label: 'Programa tu dinero',
+                                onTap: () {
+                                  // TODO: programar transferencia/ahorro
+                                },
+                              ),
+                            ],
+                          ),
+
+                          const SizedBox(height: 16),
+
                           LastTransactions(),
-                          // StatisticsCards(
-                          //   colorScheme: colorScheme,
-                          //   onEarnMoney: () => _goToEarnMoney(context),
-                          //   onReports: () => _goToReports(context),
-                          //   onHistory: () => _showHistory(context),
-                          // ),
+
                           const SizedBox(height: 32),
                         ],
                       ),
