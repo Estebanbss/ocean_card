@@ -36,7 +36,8 @@ class QuickActionButton extends StatelessWidget {
         elevation: 2,
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        minimumSize: const Size(0, 0),
+        // Make the button expand to the parent's width without using Expanded
+        minimumSize: Size(double.infinity, 48),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
     );
