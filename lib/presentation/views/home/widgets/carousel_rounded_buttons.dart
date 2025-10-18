@@ -21,7 +21,8 @@ class CarouselRoundedButtons extends StatelessWidget {
     const double labelLineHeight = 1.4;
     const int labelMaxLines = 2;
     final double labelHeight = labelFontSize * labelLineHeight * labelMaxLines;
-    const double safetyPadding = 6.0; // small extra space to avoid sub-pixel overflows
+    const double safetyPadding =
+        6.0; // small extra space to avoid sub-pixel overflows
     final double totalHeight = circleSize + 8 + labelHeight + safetyPadding;
 
     return SizedBox(
@@ -30,7 +31,9 @@ class CarouselRoundedButtons extends StatelessWidget {
       child: LayoutBuilder(
         builder: (context, constraints) {
           const double horizontalPadding = 12.0;
-          final double availableWidth = (constraints.maxWidth.isFinite ? constraints.maxWidth : 0) - horizontalPadding * 2;
+          final double availableWidth =
+              (constraints.maxWidth.isFinite ? constraints.maxWidth : 0) -
+              horizontalPadding * 2;
           final int count = items.length;
           final double minItemWidth = circleSize + 8; // same as before
           final double totalSpacing = spacing * (count > 0 ? count - 1 : 0);
@@ -62,14 +65,20 @@ class CarouselRoundedButtons extends StatelessWidget {
                         width: circleSize,
                         height: circleSize,
                         decoration: BoxDecoration(
-                          color: item.backgroundColor ?? Theme.of(context).colorScheme.primaryContainer,
+                          color:
+                              item.backgroundColor ??
+                              Theme.of(context).colorScheme.primaryContainer,
                           shape: BoxShape.circle,
                         ),
                         child: Center(
                           child: Icon(
                             item.icon,
                             size: iconSize,
-                            color: item.iconColor ?? Theme.of(context).colorScheme.onPrimaryContainer,
+                            color:
+                                item.iconColor ??
+                                Theme.of(
+                                  context,
+                                ).colorScheme.onPrimaryContainer,
                           ),
                         ),
                       ),
@@ -116,4 +125,5 @@ class CarouselRoundedButtonItem {
     this.iconColor,
   });
 }
+
 // Removed stray trailing text

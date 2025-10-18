@@ -21,17 +21,20 @@ class LastTransactions extends StatelessWidget {
                 context,
               ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(
-                  context,
-                ).push(MaterialPageRoute(builder: (_) => const HistoryView()));
-              },
-              child: Text(
-                'Ver todas',
-                style: TextStyle(
-                  color: colorScheme.primary,
-                  fontWeight: FontWeight.w600,
+            MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const HistoryView()),
+                  );
+                },
+                child: Text(
+                  'Ver todas',
+                  style: TextStyle(
+                    color: colorScheme.primary,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ),
@@ -39,7 +42,14 @@ class LastTransactions extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         // Show a compact list of recent activities
-        const RecentActivityList(),
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          decoration: BoxDecoration(
+            color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: const RecentActivityList(),
+        ),
       ],
     );
   }

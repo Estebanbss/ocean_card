@@ -121,22 +121,19 @@ class _HomeViewState extends State<HomeView> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           CarouselRoundedButtons(
                             items: [
                               CarouselRoundedButtonItem(
                                 icon: Icons.credit_card,
                                 label: 'Tarjetas',
-                                onTap: () {
-                                  // TODO: navegar a la vista de tarjeta
-                                },
+                                onTap: () {},
                               ),
                               CarouselRoundedButtonItem(
                                 icon: Icons.link,
                                 label: 'Cobrar por link',
-                                onTap: () {
-                                  // TODO: implementar cobrar por link
-                                },
+                                onTap: () {},
                               ),
                               CarouselRoundedButtonItem(
                                 icon: Icons.send,
@@ -152,22 +149,43 @@ class _HomeViewState extends State<HomeView> {
                               CarouselRoundedButtonItem(
                                 icon: Icons.account_balance_wallet,
                                 label: 'Web3 Wallet',
-                                onTap: () {
-                                  // TODO: abrir wallet
-                                },
+                                onTap: () {},
                               ),
                               CarouselRoundedButtonItem(
                                 icon: Icons.schedule,
                                 label: 'Programa tu dinero',
-                                onTap: () {
-                                  // TODO: programar transferencia/ahorro
-                                },
+                                onTap: () {},
                               ),
                             ],
                           ),
 
                           const SizedBox(height: 16),
-
+                          // boton "refiere y gana"
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton.icon(
+                              onPressed: () {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      'Funcionalidad de referidos próximamente',
+                                    ),
+                                  ),
+                                );
+                              },
+                              icon: const Icon(Icons.person_add),
+                              label: const Text('Refiere y gana'),
+                              style: ElevatedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 14,
+                                ),
+                                textStyle: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 12),
                           LastTransactions(),
 
                           const SizedBox(height: 32),

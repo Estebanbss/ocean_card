@@ -19,27 +19,39 @@ class QuickActionsContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
+    return Column(
       children: [
-        Expanded(
-          child: QuickActionButton(
-            icon: Icons.download,
-            label: 'Depositar',
-            color: colorScheme.onPrimary,
-            onTap: onDepositTap,
-          ),
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Expanded(
+              child: QuickActionButton(
+                icon: Icons.download,
+                label: 'Depositar',
+                color: colorScheme.onPrimary,
+                onTap: onDepositTap,
+              ),
+            ),
+
+            const SizedBox(width: 10),
+
+            Expanded(
+              child: QuickActionButton(
+                icon: Icons.upload,
+                label: 'Retirar',
+                color: colorScheme.onPrimary,
+                onTap: onWithdrawTap,
+              ),
+            ),
+          ],
         ),
-
-        const SizedBox(width: 10),
-
-        Expanded(
-          child: QuickActionButton(
-            icon: Icons.upload,
-            label: 'Retirar',
-            color: colorScheme.onPrimary,
-            onTap: onWithdrawTap,
-          ),
+        const SizedBox(height: 12),
+        //un boton que ocupe todo el ancho "Mi cuenta bancaria"
+        QuickActionButton(
+          icon: Icons.account_balance,
+          label: 'Mi cuenta bancaria',
+          color: colorScheme.onPrimary,
+          onTap: onCvuTap,
         ),
       ],
     );
