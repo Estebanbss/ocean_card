@@ -54,7 +54,7 @@ class CarouselRoundedButtons extends StatelessWidget {
             ],
           );
         },
-        separatorBuilder: (_, __) => SizedBox(width: spacing),
+  separatorBuilder: (context, index) => SizedBox(width: spacing),
         itemCount: items.length,
       ),
     );
