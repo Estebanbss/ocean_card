@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ocean_card/core/configuration/tema/theme.dart';
 
 class QuickActionButton extends StatelessWidget {
   final IconData icon;
@@ -31,8 +32,8 @@ class QuickActionButton extends StatelessWidget {
         ),
       ),
       style: ElevatedButton.styleFrom(
-        backgroundColor: colorScheme.primaryContainer,
-        foregroundColor: color,
+        backgroundColor: colorScheme.black,
+        foregroundColor: colorScheme.onBlack,
         elevation: 2,
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),

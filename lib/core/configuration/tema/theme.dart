@@ -350,6 +350,16 @@ class MaterialTheme {
   List<ExtendedColor> get extendedColors => [];
 }
 
+extension CustomColors on ColorScheme {
+  Color get onBlack => brightness == Brightness.light
+      ? const Color(0xFF424242) // Negro clarito en light theme
+      : const Color(0xFFBDBDBD); // Gris clarito en dark theme
+
+  Color get black => brightness == Brightness.light
+      ? const Color(0xFF212121) // Negro en light theme
+      : const Color(0xFFE0E0E0); // Gris claro en dark theme
+}
+
 class ExtendedColor {
   final Color seed, value;
   final ColorFamily light;

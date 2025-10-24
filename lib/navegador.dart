@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ocean_card/core/configuration/tema/tema_cubit.dart';
+import 'package:ocean_card/core/configuration/tema/theme.dart';
 
 // import 'presentation/blocs/autenticacion/autenticacion_bloc.dart';
 
@@ -80,7 +81,7 @@ class HomeScreenState extends State<Navegador> {
         child: IconButton(
           icon: Icon(
             isDark ? Icons.dark_mode : Icons.light_mode,
-            color: Theme.of(context).colorScheme.onPrimary,
+            color: Theme.of(context).colorScheme.onBlack,
           ),
           onPressed: () => context.read<TemaCubit>().toggleTheme(),
         ),
@@ -116,42 +117,26 @@ class HomeScreenState extends State<Navegador> {
           Icon(
             Icons.account_circle,
             size: 32,
-            color: Theme.of(context).colorScheme.onPrimary,
+            color: Theme.of(context).colorScheme.onBlack,
           ),
           const SizedBox(width: 8),
-          Stack(
-            children: [
-              // Trazo (stroke) para engrosar el contorno
-              Text(
-                username ?? 'Usuario',
-                style: TextStyle(
-                  foreground: Paint()
-                    ..style = PaintingStyle.stroke
-                    ..strokeWidth = 0.9
-                    ..color = Theme.of(context).colorScheme.onPrimary,
-                  fontWeight: FontWeight.w900,
-                  fontSize: 16,
-                ),
-              ),
-              // Relleno encima
-              Text(
-                username ?? 'Usuario',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                  fontWeight: FontWeight.w900,
-                  fontSize: 16,
-                ),
-              ),
-            ],
+
+          Text(
+            username ?? 'Usuario',
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onBlack,
+              fontWeight: FontWeight.w900,
+              fontSize: 16,
+            ),
           ),
         ],
       ),
 
-      color: Theme.of(context).colorScheme.onPrimary,
+      color: Theme.of(context).colorScheme.onBlack,
       offset: const Offset(0, 48), // Aparece justo debajo del botón
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(18),
-        side: BorderSide(color: Theme.of(context).colorScheme.onPrimary),
+        side: BorderSide(color: Theme.of(context).colorScheme.onBlack),
       ),
       elevation: 12,
       padding: EdgeInsets.zero,
@@ -316,12 +301,12 @@ class HomeScreenState extends State<Navegador> {
                 : NavigationRailLabelType.selected,
             indicatorColor: Theme.of(
               context,
-            ).colorScheme.primary.withValues(alpha: 0.2),
+            ).colorScheme.black.withValues(alpha: 0.2),
             selectedIconTheme: IconThemeData(
-              color: Theme.of(context).colorScheme.primary,
+              color: Theme.of(context).colorScheme.onBlack,
             ),
             selectedLabelTextStyle: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
+              color: Theme.of(context).colorScheme.onBlack,
               fontWeight: FontWeight.bold,
             ),
             unselectedIconTheme: IconThemeData(
@@ -348,10 +333,10 @@ class HomeScreenState extends State<Navegador> {
       type: BottomNavigationBarType.fixed,
       iconSize: 15,
       selectedIconTheme: IconThemeData(
-        color: Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).colorScheme.onBlack,
       ),
       selectedLabelStyle: TextStyle(
-        color: Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).colorScheme.onBlack,
         fontWeight: FontWeight.bold,
       ),
       unselectedIconTheme: IconThemeData(
@@ -368,7 +353,7 @@ class HomeScreenState extends State<Navegador> {
         ),
       ],
       currentIndex: _selectedIndex,
-      selectedItemColor: Theme.of(context).colorScheme.primary,
+      selectedItemColor: Theme.of(context).colorScheme.onBlack,
       onTap: _onItemTapped,
     );
   }
@@ -391,8 +376,6 @@ class HomeScreenState extends State<Navegador> {
       builder: (context, isDarkTheme) {
         return Scaffold(
           appBar: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: Theme.of(context).colorScheme.primary,
             title: SingleChildScrollView(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

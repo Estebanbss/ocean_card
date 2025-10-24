@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ocean_card/core/configuration/tema/theme.dart';
 import 'package:ocean_card/presentation/views/history/history_view.dart';
 import 'package:ocean_card/presentation/views/home/widgets/recent_activity_list.dart';
 
@@ -32,7 +33,7 @@ class LastTransactions extends StatelessWidget {
                 child: Text(
                   'Ver todas',
                   style: TextStyle(
-                    color: colorScheme.primary,
+                    color: colorScheme.onBlack,
                     fontWeight: FontWeight.w600,
                   ),
                 ),

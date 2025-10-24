@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ocean_card/core/configuration/tema/theme.dart';
 import 'package:ocean_card/presentation/views/actions/actions.dart';
 import 'package:ocean_card/presentation/views/home/widgets/last_transactions.dart';
 import 'package:ocean_card/presentation/views/home/widgets/carousel_rounded_buttons.dart';
@@ -14,7 +15,6 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   bool _showBalance = true;
   String _selectedCurrency = 'USD';
-  final int _selectionStyle = 1; // 1 = full cards, 2 = selection buttons
 
   final List<Map<String, dynamic>> _currencies = [
     {
@@ -105,16 +105,7 @@ class _HomeViewState extends State<HomeView> {
                           _selectedCurrency = currency;
                         });
                       },
-                      onAddFunds: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => const AddFundsView(),
-                          ),
-                        );
-                      },
                       colorScheme: colorScheme,
-                      selectionStyle:
-                          _selectionStyle, // Pass the selection style
                     ),
                     const SizedBox(height: 12),
 
@@ -173,8 +164,14 @@ class _HomeViewState extends State<HomeView> {
                                   ),
                                 );
                               },
-                              icon: const Icon(Icons.person_add),
-                              label: const Text('Refiere y gana'),
+                              icon: Icon(
+                                Icons.person_add,
+                                color: colorScheme.onBlack,
+                              ),
+                              label: Text(
+                                'Refiere y gana',
+                                style: TextStyle(color: colorScheme.onBlack),
+                              ),
                               style: ElevatedButton.styleFrom(
                                 padding: const EdgeInsets.symmetric(
                                   vertical: 14,
