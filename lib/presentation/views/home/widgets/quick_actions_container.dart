@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ocean_card/core/configuration/tema/theme.dart';
 import 'quick_action_button.dart';
 
 class QuickActionsContainer extends StatelessWidget {
