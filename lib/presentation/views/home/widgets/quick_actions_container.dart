@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ocean_card/core/configuration/tema/theme.dart';
 import 'quick_action_button.dart';
 
 class QuickActionsContainer extends StatelessWidget {
@@ -29,6 +30,7 @@ class QuickActionsContainer extends StatelessWidget {
                 icon: Icons.download,
                 label: 'Depositar',
                 color: colorScheme.onPrimary,
+                backgroundColor: colorScheme.primary,
                 onTap: onDepositTap,
               ),
             ),
@@ -40,6 +42,7 @@ class QuickActionsContainer extends StatelessWidget {
                 icon: Icons.upload,
                 label: 'Retirar',
                 color: colorScheme.onPrimary,
+                backgroundColor: colorScheme.primary,
                 onTap: onWithdrawTap,
               ),
             ),
@@ -50,6 +53,7 @@ class QuickActionsContainer extends StatelessWidget {
         QuickActionButton(
           icon: Icons.account_balance,
           label: 'Mi cuenta bancaria',
+          backgroundColor: colorScheme.primary,
           color: colorScheme.onPrimary,
           onTap: onCvuTap,
         ),

@@ -3,6 +3,7 @@ import 'package:ocean_card/core/configuration/tema/theme.dart';
 
 class QuickActionButton extends StatelessWidget {
   final IconData icon;
+  final Color backgroundColor;
   final String label;
   final Color color;
   final VoidCallback onTap;
@@ -14,6 +15,7 @@ class QuickActionButton extends StatelessWidget {
     required this.label,
     required this.color,
     required this.onTap,
+    this.backgroundColor = Colors.black,
     this.tooltip,
   });
 
@@ -32,7 +34,7 @@ class QuickActionButton extends StatelessWidget {
         ),
       ),
       style: ElevatedButton.styleFrom(
-        backgroundColor: colorScheme.black,
+        backgroundColor: backgroundColor,
         foregroundColor: colorScheme.onBlack,
         elevation: 2,
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),

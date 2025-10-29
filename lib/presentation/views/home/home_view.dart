@@ -121,11 +121,7 @@ class _HomeViewState extends State<HomeView> {
                                 label: 'Tarjetas',
                                 onTap: () {},
                               ),
-                              CarouselRoundedButtonItem(
-                                icon: Icons.link,
-                                label: 'Cobrar por link',
-                                onTap: () {},
-                              ),
+
                               CarouselRoundedButtonItem(
                                 icon: Icons.send,
                                 label: 'Enviar dinero',
@@ -139,12 +135,7 @@ class _HomeViewState extends State<HomeView> {
                               ),
                               CarouselRoundedButtonItem(
                                 icon: Icons.account_balance_wallet,
-                                label: 'Web3 Wallet',
-                                onTap: () {},
-                              ),
-                              CarouselRoundedButtonItem(
-                                icon: Icons.schedule,
-                                label: 'Programa tu dinero',
+                                label: 'Deposito',
                                 onTap: () {},
                               ),
                             ],
