@@ -17,7 +17,9 @@ class StepsIndicator extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(totalSteps, (index) {
         final isActive = stepNow >= 0 && index <= stepNow;
-        return Container(
+        return AnimatedContainer(
+          duration: const Duration(milliseconds: 150),
+          curve: Curves.easeInOut,
           width: 18,
           height: 18,
           margin: const EdgeInsets.symmetric(horizontal: 4),
