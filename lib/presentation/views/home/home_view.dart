@@ -118,12 +118,16 @@ class _HomeViewState extends State<HomeView> {
                             items: [
                               CarouselRoundedButtonItem(
                                 icon: Icons.credit_card,
+                                backgroundColor: colorScheme.onBlack,
+                                iconColor: colorScheme.surface,
                                 label: 'Tarjetas',
                                 onTap: () {},
                               ),
 
                               CarouselRoundedButtonItem(
                                 icon: Icons.send,
+                                backgroundColor: colorScheme.onBlack,
+                                iconColor: colorScheme.surface,
                                 label: 'Enviar dinero',
                                 onTap: () {
                                   Navigator.of(context).push(
@@ -135,6 +139,8 @@ class _HomeViewState extends State<HomeView> {
                               ),
                               CarouselRoundedButtonItem(
                                 icon: Icons.account_balance_wallet,
+                                backgroundColor: colorScheme.onBlack,
+                                iconColor: colorScheme.surface,
                                 label: 'Deposito',
                                 onTap: () {},
                               ),
@@ -142,38 +148,7 @@ class _HomeViewState extends State<HomeView> {
                           ),
 
                           const SizedBox(height: 16),
-                          // boton "refiere y gana"
-                          SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton.icon(
-                              onPressed: () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text(
-                                      'Funcionalidad de referidos próximamente',
-                                    ),
-                                  ),
-                                );
-                              },
-                              icon: Icon(
-                                Icons.person_add,
-                                color: colorScheme.onBlack,
-                              ),
-                              label: Text(
-                                'Refiere y gana',
-                                style: TextStyle(color: colorScheme.onBlack),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 14,
-                                ),
-                                textStyle: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 12),
+
                           LastTransactions(),
 
                           const SizedBox(height: 32),
