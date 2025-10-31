@@ -111,32 +111,30 @@ class HomeScreenState extends State<Navegador> {
   // }
 
   Widget _buildProfileMenu(BuildContext context, String? username) {
-    return PopupMenuButton<int>(
-      icon: Row(
-        children: [
-          Icon(
-            Icons.account_circle,
-            size: 32,
-            color: Theme.of(context).colorScheme.onBlack,
-          ),
-          const SizedBox(width: 8),
+    final cs = Theme.of(context).colorScheme;
 
-          Text(
-            username ?? 'Usuario',
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onBlack,
-              fontWeight: FontWeight.w900,
-              fontSize: 16,
+    return PopupMenuButton<int>(
+      icon: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Row(
+          children: [
+            Text(
+              username ?? 'Usuario',
+              style: TextStyle(
+                color: cs.onBlack,
+                fontWeight: FontWeight.w900,
+                fontSize: 16,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
 
-      color: Theme.of(context).colorScheme.onBlack,
+      color: cs.surface,
       offset: const Offset(0, 48), // Aparece justo debajo del botón
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(18),
-        side: BorderSide(color: Theme.of(context).colorScheme.onBlack),
+        side: BorderSide(color: cs.outline),
       ),
       elevation: 12,
       padding: EdgeInsets.zero,
@@ -175,102 +173,120 @@ class HomeScreenState extends State<Navegador> {
             break;
         }
       },
-      itemBuilder: (context) => [
-        const PopupMenuItem<int>(
-          value: 0,
-          child: ListTile(
-            leading: Icon(Icons.person, color: Colors.blueGrey),
-            title: Text('Ver perfil'),
-            dense: true,
-            visualDensity: VisualDensity.compact,
-          ),
-        ),
-        const PopupMenuItem<int>(
-          value: 1,
-          child: ListTile(
-            leading: Icon(Icons.edit, color: Colors.blueGrey),
-            title: Text('Editar perfil'),
-            dense: true,
-            visualDensity: VisualDensity.compact,
-          ),
-        ),
-        const PopupMenuItem<int>(
-          value: 2,
-          child: ListTile(
-            leading: Icon(Icons.settings, color: Colors.blueGrey),
-            title: Text('Configuración de la cuenta'),
-            dense: true,
-            visualDensity: VisualDensity.compact,
-          ),
-        ),
-        const PopupMenuItem<int>(
-          value: 3,
-          child: ListTile(
-            leading: Icon(Icons.tune, color: Colors.blueGrey),
-            title: Text('Preferencias'),
-            dense: true,
-            visualDensity: VisualDensity.compact,
-          ),
-        ),
-        const PopupMenuItem<int>(
-          value: 4,
-          child: ListTile(
-            leading: Icon(Icons.lock, color: Colors.blueGrey),
-            title: Text('Cambiar contraseña'),
-            dense: true,
-            visualDensity: VisualDensity.compact,
-          ),
-        ),
-        const PopupMenuItem<int>(
-          value: 5,
-          child: ListTile(
-            leading: Icon(Icons.notifications, color: Colors.blueGrey),
-            title: Text('Notificaciones'),
-            dense: true,
-            visualDensity: VisualDensity.compact,
-          ),
-        ),
-        const PopupMenuItem<int>(
-          value: 6,
-          child: ListTile(
-            leading: Icon(Icons.privacy_tip, color: Colors.blueGrey),
-            title: Text('Privacidad'),
-            dense: true,
-            visualDensity: VisualDensity.compact,
-          ),
-        ),
-        const PopupMenuItem<int>(
-          value: 7,
-          child: ListTile(
-            leading: Icon(Icons.help_center, color: Colors.blueGrey),
-            title: Text('Centro de ayuda / Soporte'),
-            dense: true,
-            visualDensity: VisualDensity.compact,
-          ),
-        ),
-        const PopupMenuItem<int>(
-          value: 8,
-          child: ListTile(
-            leading: Icon(Icons.language, color: Colors.blueGrey),
-            title: Text('Idioma'),
-            dense: true,
-            visualDensity: VisualDensity.compact,
-          ),
-        ),
-        PopupMenuDivider(height: 0),
-        const PopupMenuItem<int>(
-          value: 9,
-          child: ListTile(
-            leading: Icon(Icons.logout, color: Colors.redAccent),
-            title: Text(
-              'Cerrar sesión',
-              style: TextStyle(color: Colors.redAccent),
+      itemBuilder: (context) {
+        final cs = Theme.of(context).colorScheme;
+        return [
+          PopupMenuItem<int>(
+            value: 0,
+            child: ListTile(
+              leading: Icon(Icons.person, color: cs.onSurfaceVariant),
+              title: Text('Ver perfil', style: TextStyle(color: cs.onSurface)),
+              dense: true,
+              visualDensity: VisualDensity.compact,
             ),
-            dense: true,
-            visualDensity: VisualDensity.compact,
           ),
-        ),
-      ],
+          PopupMenuItem<int>(
+            value: 1,
+            child: ListTile(
+              leading: Icon(Icons.edit, color: cs.onSurfaceVariant),
+              title: Text(
+                'Editar perfil',
+                style: TextStyle(color: cs.onSurface),
+              ),
+              dense: true,
+              visualDensity: VisualDensity.compact,
+            ),
+          ),
+          PopupMenuItem<int>(
+            value: 2,
+            child: ListTile(
+              leading: Icon(Icons.settings, color: cs.onSurfaceVariant),
+              title: Text(
+                'Configuración de la cuenta',
+                style: TextStyle(color: cs.onSurface),
+              ),
+              dense: true,
+              visualDensity: VisualDensity.compact,
+            ),
+          ),
+          PopupMenuItem<int>(
+            value: 3,
+            child: ListTile(
+              leading: Icon(Icons.tune, color: cs.onSurfaceVariant),
+              title: Text(
+                'Preferencias',
+                style: TextStyle(color: cs.onSurface),
+              ),
+              dense: true,
+              visualDensity: VisualDensity.compact,
+            ),
+          ),
+          PopupMenuItem<int>(
+            value: 4,
+            child: ListTile(
+              leading: Icon(Icons.lock, color: cs.onSurfaceVariant),
+              title: Text(
+                'Cambiar contraseña',
+                style: TextStyle(color: cs.onSurface),
+              ),
+              dense: true,
+              visualDensity: VisualDensity.compact,
+            ),
+          ),
+          PopupMenuItem<int>(
+            value: 5,
+            child: ListTile(
+              leading: Icon(Icons.notifications, color: cs.onSurfaceVariant),
+              title: Text(
+                'Notificaciones',
+                style: TextStyle(color: cs.onSurface),
+              ),
+              dense: true,
+              visualDensity: VisualDensity.compact,
+            ),
+          ),
+          PopupMenuItem<int>(
+            value: 6,
+            child: ListTile(
+              leading: Icon(Icons.privacy_tip, color: cs.onSurfaceVariant),
+              title: Text('Privacidad', style: TextStyle(color: cs.onSurface)),
+              dense: true,
+              visualDensity: VisualDensity.compact,
+            ),
+          ),
+          PopupMenuItem<int>(
+            value: 7,
+            child: ListTile(
+              leading: Icon(Icons.help_center, color: cs.onSurfaceVariant),
+              title: Text(
+                'Centro de ayuda / Soporte',
+                style: TextStyle(color: cs.onSurface),
+              ),
+              dense: true,
+              visualDensity: VisualDensity.compact,
+            ),
+          ),
+          PopupMenuItem<int>(
+            value: 8,
+            child: ListTile(
+              leading: Icon(Icons.language, color: cs.onSurfaceVariant),
+              title: Text('Idioma', style: TextStyle(color: cs.onSurface)),
+              dense: true,
+              visualDensity: VisualDensity.compact,
+            ),
+          ),
+          const PopupMenuDivider(height: 0),
+          PopupMenuItem<int>(
+            value: 9,
+            child: ListTile(
+              leading: Icon(Icons.logout, color: cs.error),
+              title: Text('Cerrar sesión', style: TextStyle(color: cs.error)),
+              dense: true,
+              visualDensity: VisualDensity.compact,
+            ),
+          ),
+        ];
+      },
     );
   }
 
